@@ -2,10 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { rizhi } from './config/rizhi';
 import { peizhiwenjian } from './config/peizhiwenjian';
+import { qingqiurizhi } from './config/qingqiurizhi';
 
 async function bootstrap()
 {
   const app = await NestFactory.create(AppModule, { logger: rizhi });
+
+  if (peizhiwenjian.kaifa) app.use(qingqiurizhi);
+
   await app.listen(peizhiwenjian.duankou);
 }
 

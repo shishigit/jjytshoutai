@@ -12,14 +12,14 @@ interface Peizhiwenjian
 
 // 开发环境
 const kaifahuanjing: Peizhiwenjian = {
-  duankou: 3000,
+  duankou: 3100,
   kaifa: true,
 };
 
 // 生产环境
 // noinspection JSUnusedLocalSymbols
 const shengchanhuanjing: Peizhiwenjian = {
-  duankou: 3000,
+  duankou: 3100,
   kaifa: false,
 };
 
