@@ -36,7 +36,7 @@ class XitongRizhi implements LoggerService
   error(message: any, trace?: string, context?: string): any
   {
     this.logger.error(context ? `${context}: ${message}` : message);
-    this.logger.error(trace);
+    if (trace) this.logger.error(trace);
   }
 }
 
