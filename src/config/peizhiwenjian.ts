@@ -5,16 +5,21 @@ interface Peizhiwenjian
 {
   // 开发环境？生产环境？
   kaifa: boolean,
+
+  // 监听端口
+  duankou: number
 }
 
 // 开发环境
 const kaifahuanjing: Peizhiwenjian = {
+  duankou: 3000,
   kaifa: true,
 };
 
 // 生产环境
 // noinspection JSUnusedLocalSymbols
 const shengchanhuanjing: Peizhiwenjian = {
+  duankou: 3000,
   kaifa: false,
 };
 
