@@ -11,4 +11,4 @@ async function bootstrap()
 
 bootstrap()
   .then(value => rizhi.log('系统启动'))
-  .catch(reason => rizhi.log(('系统异常')));
+  .catch(reason => rizhi.log('系统异常'));
