@@ -9,4 +9,4 @@ async function bootstrap()
 
 bootstrap()
   .then(value => console.log('系统启动'))
-  .catch(reason => console.log(('系统异常')))
+  .catch(reason => console.log(('系统异常')));
