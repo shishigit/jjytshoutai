@@ -7,11 +7,11 @@ export class Yonghu
   id: number;
 
   @Column()
-  firstName: string;
+  zhanghao: string;
 
   @Column()
-  lastName: string;
+  mima: string;
 
   @Column({ default: true })
-  isActive: boolean;
+  jihuo: boolean;
 }

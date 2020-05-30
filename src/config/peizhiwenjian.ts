@@ -1,5 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
-import { Yonghu } from '../db/Yonghu';
+import { Yonghu } from '../db/yonghu';
 
 /******************************************************************************
  * 配置文件：整个系统的配置，用于配置开发环境和生产环境
