@@ -6,12 +6,12 @@ export class Yonghu
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ width: 50, nullable: false, unique: true })
   zhanghao: string;
 
-  @Column()
+  @Column({ width: 50, nullable: false })
   mima: string;
 
-  @Column({ default: true })
+  @Column({ default: true, nullable: false })
   jihuo: boolean;
 }
