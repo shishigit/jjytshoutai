@@ -2,9 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './ctrl/app.controller';
 import { AppService } from './serv/app.service';
 import { CtrlXitong } from './ctrl/ctrl.xitong';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { peizhiwenjian } from './config/peizhiwenjian';
 
 @Module({
-  imports: [],
+  imports: [
+    TypeOrmModule.forRoot(peizhiwenjian.shujuku),
+  ],
   controllers: [AppController, CtrlXitong],
   providers: [AppService],
 })
