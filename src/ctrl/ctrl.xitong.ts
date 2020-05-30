@@ -1,17 +1,22 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { YichangTishi } from '../config/yichang';
+import { Yonghu } from '../db/yonghu';
+import { Jiami } from '../config/jiami';
 
 @Controller('xitong')
 export class CtrlXitong
 {
   @Post('denglu')
-  denglu(
+  async denglu(
     @Body('zhanghao') zhanghao: string,
     @Body('mima')mima: string,
   )
   {
     if (!zhanghao) throw  new YichangTishi('账号不能为空');
     if (!mima) throw  new YichangTishi('密码不能为空');
-    return '';
+    let yonghu = await Yonghu.findByZhanghao(zhanghao);
+    if (!yonghu) throw new YichangTishi('账号或者密码错误！');
+    let fuhe = Jiami.fuhe(mima, yonghu.mima);
+    if (!fuhe) throw new YichangTishi('账号或者密码错误！');
   }
 }

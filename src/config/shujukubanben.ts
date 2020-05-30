@@ -1,6 +1,7 @@
 import { Banben } from '../db/banben';
 import { Yonghu } from '../db/yonghu';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
+import { Jiami } from './jiami';
 
 async function v001(manager: EntityManager)
 {
@@ -9,7 +10,7 @@ async function v001(manager: EntityManager)
   {
     let yonghu = new Yonghu();
     yonghu.zhanghao = 'admin';
-    yonghu.mima = 'mima';
+    yonghu.mima = Jiami.jiami('mima');
     await manager.save(yonghu);
   }
 }
