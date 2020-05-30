@@ -18,5 +18,6 @@ export class CtrlXitong
     if (!yonghu) throw new YichangTishi('账号或者密码错误！');
     let fuhe = Jiami.fuhe(mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
+    return {};
   }
 }
