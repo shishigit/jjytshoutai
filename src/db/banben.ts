@@ -9,6 +9,6 @@ export class Banben extends BaseEntity
   @Column({ nullable: false, unique: true })
   banbenhao: string;
 
-  @Column({ width: 200 })
+  @Column({ width: 200, nullable: true })
   shuoming: string;
 }

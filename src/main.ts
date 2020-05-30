@@ -4,6 +4,7 @@ import { rizhi } from './config/rizhi';
 import { peizhiwenjian } from './config/peizhiwenjian';
 import { qingqiurizhi } from './config/qingqiurizhi';
 import { HttpExceptionFilter } from './config/yichang';
+import { shujukubanben } from './config/shujukubanben';
 
 async function bootstrap()
 {
@@ -12,9 +13,14 @@ async function bootstrap()
   if (peizhiwenjian.kaifa) app.use(qingqiurizhi);
   app.useGlobalFilters(new HttpExceptionFilter());
 
+  await shujukubanben();
   await app.listen(peizhiwenjian.duankou);
 }
 
 bootstrap()
   .then(() => rizhi.log('系统启动'))
-  .catch(() => rizhi.log('系统异常'));
+  .catch(err =>
+  {
+    rizhi.error('系统异常');
+    rizhi.error(err);
+  });

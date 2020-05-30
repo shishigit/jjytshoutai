@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { AppController } from './ctrl/app.controller';
 import { AppService } from './serv/app.service';
 import { CtrlXitong } from './ctrl/ctrl.xitong';
@@ -12,6 +12,9 @@ import { peizhiwenjian } from './config/peizhiwenjian';
   controllers: [AppController, CtrlXitong],
   providers: [AppService],
 })
-export class AppModule
+export class AppModule implements OnApplicationBootstrap
 {
+  onApplicationBootstrap(): any
+  {
+  }
 }
