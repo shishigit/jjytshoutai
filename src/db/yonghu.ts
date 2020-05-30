@@ -14,4 +14,9 @@ export class Yonghu extends BaseEntity
 
   @Column({ default: true, nullable: false })
   jihuo: boolean;
+
+  static findByZhanghao(zhanghao: string)
+  {
+    return Yonghu.findOne({ where: { zhanghao } });
+  }
 }

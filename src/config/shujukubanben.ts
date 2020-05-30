@@ -1,11 +1,10 @@
 import { Banben } from '../db/banben';
-import { YonghuService } from '../db/yonghu.service';
 import { Yonghu } from '../db/yonghu';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 
-async function v001(manager: EntityManager, st: string)
+async function v001(manager: EntityManager)
 {
-  let ls = await YonghuService.findByZhanghao('admin');
+  let ls = await Yonghu.findByZhanghao('admin');
   if (!ls)
   {
     let yonghu = new Yonghu();
@@ -15,22 +14,24 @@ async function v001(manager: EntityManager, st: string)
   }
 }
 
-async function zhixing(func: (manager: EntityManager) => void, shuoming: string, manager: EntityManager)
+export class Shujukubanben
 {
-  let yiyou = await Banben.findOne({ where: { banbenhao: func.name } });
-  // todo zheli xuyaoshiwu
-  if (!yiyou)
+  @Transaction()
+  static async tongbushuju(@TransactionManager() manager?: EntityManager)
   {
-    func.call(manager);
-    let banben = new Banben();
-    banben.banbenhao = func.name;
-    banben.shuoming = shuoming;
-    await manager.save(banben);
+    await Shujukubanben.zhixing(v001, '添加系统管理员', manager);
   }
-}
 
-@Transaction()
-export async function shujukubanben(@TransactionManager() manager: EntityManager)
-{
-  await zhixing(v001, '添加系统管理员', manager);
+  static async zhixing(func: (manager: EntityManager) => Promise<any>, shuoming: string, manager: EntityManager)
+  {
+    let yiyou = await Banben.findOne({ where: { banbenhao: func.name } });
+    if (!yiyou)
+    {
+      await func(manager);
+      let banben = new Banben();
+      banben.banbenhao = func.name;
+      banben.shuoming = shuoming;
+      await manager.save(banben);
+    }
+  }
 }

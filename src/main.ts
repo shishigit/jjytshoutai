@@ -4,7 +4,7 @@ import { rizhi } from './config/rizhi';
 import { peizhiwenjian } from './config/peizhiwenjian';
 import { qingqiurizhi } from './config/qingqiurizhi';
 import { HttpExceptionFilter } from './config/yichang';
-import { shujukubanben } from './config/shujukubanben';
+import { Shujukubanben } from './config/shujukubanben';
 
 async function bootstrap()
 {
@@ -13,7 +13,7 @@ async function bootstrap()
   if (peizhiwenjian.kaifa) app.use(qingqiurizhi);
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  await shujukubanben();
+  await Shujukubanben.tongbushuju();
   await app.listen(peizhiwenjian.duankou);
 }
 
