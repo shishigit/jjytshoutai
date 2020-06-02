@@ -1,12 +1,12 @@
-import { HOST_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '../../constants';
-import { isString, isUndefined } from '../../utils/shared.utils';
-import { ScopeOptions } from '../../interfaces/scope-options.interface';
-
 /**
  * Interface defining options that can be passed to `@Controller()` decorator
  *
  * @publicApi
  */
+import { ScopeOptions } from '@nestjs/common';
+import { isString, isUndefined } from '@nestjs/common/utils/shared.utils';
+import { HOST_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
+
 export interface ControllerOptions extends ScopeOptions
 {
   /**

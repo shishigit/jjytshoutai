@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { AppService } from '../serv/app.service';
-import { JJYGet } from '../config/zhujie';
+import { JJYGet } from '../config/request-mapping.decorator';
 
 @Controller()
 export class AppController
