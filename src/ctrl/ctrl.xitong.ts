@@ -1,12 +1,13 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller } from '@nestjs/common';
 import { YichangTishi } from '../config/yichang';
 import { Yonghu } from '../db/yonghu';
 import { Jiami } from '../config/jiami';
+import { JJYPost } from '../config/zhujie';
 
 @Controller('xitong')
 export class CtrlXitong
 {
-  @Post('denglu')
+  @JJYPost('denglu')
   async denglu(
     @Body('zhanghao') zhanghao: string,
     @Body('mima')mima: string,

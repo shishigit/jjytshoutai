@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { AppService } from '../serv/app.service';
+import { JJYGet } from '../config/zhujie';
 
 @Controller()
 export class AppController
@@ -8,7 +9,7 @@ export class AppController
   {
   }
 
-  @Get()
+  @JJYGet()
   getHello(): string
   {
     return this.appService.getHello();

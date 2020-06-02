@@ -1,17 +1,5 @@
-export const PATH_METADATA = 'path';
-export const METHOD_METADATA = 'method';
-
-export enum RequestMethod
-{
-  GET = 0,
-  POST,
-  PUT,
-  DELETE,
-  PATCH,
-  ALL,
-  OPTIONS,
-  HEAD,
-}
+import { RequestMethod } from '@nestjs/common';
+import { METHOD_METADATA, PATH_METADATA } from '@nestjs/common/constants';
 
 export interface RequestMappingMetadata
 {
@@ -61,7 +49,7 @@ const createMappingDecorator = (method: RequestMethod) => (
  *
  * @publicApi
  */
-export const Post = createMappingDecorator(RequestMethod.POST);
+export const JJYPost = createMappingDecorator(RequestMethod.POST);
 
 /**
  * Route handler (method) Decorator. Routes HTTP GET requests to the specified path.
@@ -70,7 +58,7 @@ export const Post = createMappingDecorator(RequestMethod.POST);
  *
  * @publicApi
  */
-export const Get = createMappingDecorator(RequestMethod.GET);
+export const JJYGet = createMappingDecorator(RequestMethod.GET);
 
 /**
  * Route handler (method) Decorator. Routes all HTTP requests to the specified path.
@@ -79,4 +67,4 @@ export const Get = createMappingDecorator(RequestMethod.GET);
  *
  * @publicApi
  */
-export const All = createMappingDecorator(RequestMethod.ALL);
+export const JJYAll = createMappingDecorator(RequestMethod.ALL);
