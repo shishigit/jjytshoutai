@@ -1,10 +1,11 @@
-import { Body, Controller } from '@nestjs/common';
+import { Body } from '@nestjs/common';
 import { YichangTishi } from '../config/yichang';
 import { Yonghu } from '../db/yonghu';
 import { Jiami } from '../config/jiami';
 import { JJYPost } from '../config/request-mapping.decorator';
+import { JJYController } from '../config/controller.decorator';
 
-@Controller('xitong')
+@JJYController('xitong')
 export class CtrlXitong
 {
   @JJYPost('denglu')

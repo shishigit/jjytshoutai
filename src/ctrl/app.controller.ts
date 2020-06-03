@@ -1,8 +1,8 @@
-import { Controller } from '@nestjs/common';
 import { AppService } from '../serv/app.service';
 import { JJYGet } from '../config/request-mapping.decorator';
+import { JJYController } from '../config/controller.decorator';
 
-@Controller()
+@JJYController()
 export class AppController
 {
   constructor(private readonly appService: AppService)

@@ -1,31 +1,6 @@
-/**
- * Interface defining options that can be passed to `@Controller()` decorator
- *
- * @publicApi
- */
-import { ScopeOptions } from '@nestjs/common';
 import { isString, isUndefined } from '@nestjs/common/utils/shared.utils';
 import { HOST_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
-
-export interface ControllerOptions extends ScopeOptions
-{
-  /**
-   * Specifies an optional `route path prefix`.  The prefix is pre-pended to the
-   * path specified in any request decorator in the class.
-   *
-   * @see [Routing](https://docs.nestjs.com/controllers#routing)
-   */
-  path?: string;
-
-  /**
-   * Specifies an optional HTTP Request host filter.  When configured, methods
-   * within the controller will only be routed if the request host matches the
-   * specified value.
-   *
-   * @see [Routing](https://docs.nestjs.com/controllers#routing)
-   */
-  host?: string;
-}
+import { ControllerOptions } from '@nestjs/common';
 
 /**
  * Decorator that marks a class as a Nest controller that can receive inbound
@@ -46,7 +21,7 @@ export interface ControllerOptions extends ScopeOptions
  *
  * @publicApi
  */
-export function Controller(): ClassDecorator;
+export function JJYController(): ClassDecorator;
 
 /**
  * Decorator that marks a class as a Nest controller that can receive inbound
@@ -71,7 +46,7 @@ export function Controller(): ClassDecorator;
  *
  * @publicApi
  */
-export function Controller(prefix: string): ClassDecorator;
+export function JJYController(prefix: string): ClassDecorator;
 
 /**
  * Decorator that marks a class as a Nest controller that can receive inbound
@@ -101,7 +76,7 @@ export function Controller(prefix: string): ClassDecorator;
  *
  * @publicApi
  */
-export function Controller(options: ControllerOptions): ClassDecorator;
+export function JJYController(options: ControllerOptions): ClassDecorator;
 
 /**
  * Decorator that marks a class as a Nest controller that can receive inbound
@@ -133,7 +108,7 @@ export function Controller(options: ControllerOptions): ClassDecorator;
  *
  * @publicApi
  */
-export function Controller(
+export function JJYController(
   prefixOrOptions?: string | ControllerOptions,
 ): ClassDecorator
 {
