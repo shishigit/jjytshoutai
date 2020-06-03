@@ -38,11 +38,7 @@ const RequestMapping = function(
   const path = pathMetadata && pathMetadata.length ? pathMetadata : '/';
   const requestMethod = metadata[METHOD_METADATA] || RequestMethod.GET;
 
-  return (
-    target: object,
-    key: string | symbol,
-    descriptor: TypedPropertyDescriptor<any>,
-  ) =>
+  return function(target: object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
   {
     Reflect.defineMetadata(PATH_METADATA, path, descriptor.value);
     Reflect.defineMetadata(METHOD_METADATA, requestMethod, descriptor.value);
@@ -52,9 +48,7 @@ const RequestMapping = function(
 
 const createMappingDecorator = function(method: RequestMethod)
 {
-  return function(
-    path?: string | string[],
-  ): MethodDecorator
+  return function(path?: string | string[]): MethodDecorator
   {
     return RequestMapping({
       [PATH_METADATA]: path,
@@ -64,5 +58,7 @@ const createMappingDecorator = function(method: RequestMethod)
 };
 
 export const JJYPost = createMappingDecorator(RequestMethod.POST);
+// noinspection JSUnusedGlobalSymbols
 export const JJYGet = createMappingDecorator(RequestMethod.GET);
+// noinspection JSUnusedGlobalSymbols
 export const JJYAll = createMappingDecorator(RequestMethod.ALL);
