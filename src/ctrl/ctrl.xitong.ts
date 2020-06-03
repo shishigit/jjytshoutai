@@ -2,8 +2,7 @@ import { Body } from '@nestjs/common';
 import { YichangTishi } from '../config/yichang';
 import { Yonghu } from '../db/yonghu';
 import { Jiami } from '../config/jiami';
-import { JJYPost } from '../config/request-mapping.decorator';
-import { JJYController } from '../config/controller.decorator';
+import { JJYController, JJYPost } from '../config/zhujie';
 
 @JJYController('xitong')
 export class CtrlXitong
