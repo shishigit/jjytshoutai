@@ -7,7 +7,7 @@ import { JJYController, JJYPost } from '../config/zhujie';
 @JJYController('xitong', '系统级别的接口')
 export class CtrlXitong
 {
-  @JJYPost('denglu')
+  @JJYPost('denglu', '系统登陆接口')
   async denglu(
     @Body('zhanghao') zhanghao: string,
     @Body('mima')mima: string,
