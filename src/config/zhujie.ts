@@ -1,32 +1,54 @@
-import { ControllerOptions, RequestMappingMetadata, RequestMethod } from '@nestjs/common';
+import { RequestMappingMetadata, RequestMethod } from '@nestjs/common';
 import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
-import { isString, isUndefined } from '@nestjs/common/utils/shared.utils';
+import { Jiekou } from '../db/jiekou';
+import { rizhi } from './rizhi';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 
-export function JJYController(prefixOrOptions: string | ControllerOptions, fenzu: string): ClassDecorator
+const suoyouJiekou: Jiekou[] = [];
+
+export async function gengxinJiekou()
 {
-  const defaultPath = '/';
-  const [path, host, scopeOptions] = isUndefined(prefixOrOptions)
-    ? [defaultPath, undefined, undefined]
-    : isString(prefixOrOptions)
-      ? [prefixOrOptions, undefined, undefined]
-      : [
-        prefixOrOptions.path || defaultPath,
-        prefixOrOptions.host,
-        { scope: prefixOrOptions.scope },
-      ];
+  await Jiekou.update({ qiyong: true }, { qiyong: false });
+
+  for (const jiekou of suoyouJiekou)
+  {
+    if (await Jiekou.existByUrl(jiekou.url))
+      await Jiekou.updateByUrl(jiekou);
+    else
+      await jiekou.save();
+  }
+}
+
+export function JJYController(prefixOrOptions: string, fenzu: string): ClassDecorator
+{
+  const [path, host, scopeOptions] = [prefixOrOptions, undefined, undefined];
 
   return (target: object) =>
   {
-    let yuanxin = Object.getOwnPropertyDescriptors((target as any).prototype);
+    Object
+      .getOwnPropertyNames((target as any).prototype)
+      .map(value => (target as any).prototype[value])
+      .filter(value => (value as any) instanceof Function)
+      .filter(value => Reflect.hasMetadata(PATH_SHUOMING, value))
+      .forEach(value =>
+      {
+        let url = `/${path}/${Reflect.getMetadata(PATH_METADATA, value)}`;
+        if (url.includes('//'))
+        {
+          rizhi.error(`错误的URL：${url}`);
+          process.exit(0);
+        }
 
-    //todo
-
-    for (const yuanxinKey in yuanxin)
-    {
-      console.log(yuanxinKey);
-    }
+        let jiekou = new Jiekou(
+          url,
+          Reflect.getMetadata(METHOD_METADATA, value) as RequestMethod,
+          fenzu,
+          Reflect.getMetadata(PATH_SHUOMING, value),
+          true,
+        );
+        suoyouJiekou.push(jiekou);
+      });
 
     Reflect.defineMetadata(PATH_METADATA, path, target);
     Reflect.defineMetadata(HOST_METADATA, host, target);

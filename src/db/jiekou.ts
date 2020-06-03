@@ -1,14 +1,46 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { RequestMethod } from '@nestjs/common';
 
 @Entity()
-export class Jiekou
+export class Jiekou extends BaseEntity
 {
+  @Column()
+  method: 'post' | 'get' | 'all';
+
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ nullable: false, unique: true })
   url: string;
-
   @Column({ nullable: false })
-  method: 'post' | 'get';
+  fenzu: string;
+  @Column({ nullable: false })
+  shuoming: string;
+  @Column({ nullable: false })
+  qiyong: boolean;
+
+  constructor(url: string, method: RequestMethod, fenzu: string, shuoming: string, qiyong: boolean)
+  {
+    super();
+
+    this.url = url;
+    if (method === RequestMethod.POST) this.method = 'post';
+    if (method === RequestMethod.GET) this.method = 'get';
+    if (method === RequestMethod.ALL) this.method = 'all';
+    this.fenzu = fenzu;
+    this.shuoming = shuoming;
+    this.qiyong = qiyong;
+  }
+
+  static async existByUrl(url: string | Jiekou): Promise<boolean>
+  {
+    if (url instanceof Jiekou) url = url.url;
+    let ls = await Jiekou.findOne({ where: { url: url } });
+    return !!ls;
+  }
+
+  static async updateByUrl(jiekou: Jiekou)
+  {
+    await Jiekou.update({ url: jiekou.url }, jiekou);
+  }
 }

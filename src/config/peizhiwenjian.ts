@@ -1,6 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { Yonghu } from '../db/yonghu';
 import { Banben } from '../db/banben';
+import { Jiekou } from '../db/jiekou';
 
 /******************************************************************************
  * 配置文件：整个系统的配置，用于配置开发环境和生产环境
@@ -28,7 +29,7 @@ const kaifahuanjing: Peizhiwenjian = {
     username: 'root',
     password: 'shishi',
     database: 'jjytshoutai',
-    entities: [Yonghu, Banben],
+    entities: [Yonghu, Banben, Jiekou],
     synchronize: true,
   },
 };
@@ -45,7 +46,7 @@ const shengchanhuanjing: Peizhiwenjian = {
     username: 'root',
     password: 'shishi',
     database: 'jjytshoutai',
-    entities: [Yonghu, Banben],
+    entities: [Yonghu, Banben, Jiekou],
     synchronize: true,
   },
 };
