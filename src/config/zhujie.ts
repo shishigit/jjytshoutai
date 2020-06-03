@@ -2,7 +2,9 @@ import { ControllerOptions, RequestMappingMetadata, RequestMethod } from '@nestj
 import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
 import { isString, isUndefined } from '@nestjs/common/utils/shared.utils';
 
-export function JJYController(prefixOrOptions: string | ControllerOptions): ClassDecorator
+const FENZU: string = 'FENZU';
+
+export function JJYController(prefixOrOptions: string | ControllerOptions, fenzu: string): ClassDecorator
 {
   const defaultPath = '/';
   const [path, host, scopeOptions] = isUndefined(prefixOrOptions)
@@ -17,6 +19,7 @@ export function JJYController(prefixOrOptions: string | ControllerOptions): Clas
 
   return (target: object) =>
   {
+    Reflect.defineMetadata(FENZU, fenzu, target);
     Reflect.defineMetadata(PATH_METADATA, path, target);
     Reflect.defineMetadata(HOST_METADATA, host, target);
     Reflect.defineMetadata(SCOPE_OPTIONS_METADATA, scopeOptions, target);

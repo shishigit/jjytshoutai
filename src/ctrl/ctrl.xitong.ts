@@ -4,7 +4,7 @@ import { Yonghu } from '../db/yonghu';
 import { Jiami } from '../config/jiami';
 import { JJYController, JJYPost } from '../config/zhujie';
 
-@JJYController('xitong')
+@JJYController('xitong', '系统级别的接口')
 export class CtrlXitong
 {
   @JJYPost('denglu')
