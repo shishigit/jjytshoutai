@@ -2,6 +2,7 @@ import { RequestMappingMetadata, RequestMethod } from '@nestjs/common';
 import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
 import { Jiekou } from '../db/jiekou';
 import { rizhi } from './rizhi';
+import { JiekouSql } from '../db/jiekou.sql';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 
@@ -13,8 +14,8 @@ export async function gengxinJiekou()
 
   for (const jiekou of suoyouJiekou)
   {
-    if (await Jiekou.existByUrl(jiekou.url))
-      await Jiekou.updateByUrl(jiekou);
+    if (await JiekouSql.existByUrl(jiekou.url))
+      await JiekouSql.updateByUrl(jiekou);
     else
       await jiekou.save();
   }
