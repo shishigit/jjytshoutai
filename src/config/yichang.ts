@@ -1,6 +1,3 @@
-/******************************************************************************
- * 系统异常
- ******************************************************************************/
 import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
 import { Response } from 'express';
 

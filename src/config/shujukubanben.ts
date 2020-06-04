@@ -2,10 +2,11 @@ import { Banben } from '../db/banben';
 import { Yonghu } from '../db/yonghu';
 import { EntityManager, Transaction, TransactionManager } from 'typeorm';
 import { Jiami } from './jiami';
+import { YonghuSql } from '../db/yonghu.sql';
 
 async function v001(manager: EntityManager)
 {
-  let ls = await Yonghu.findByZhanghao('admin');
+  let ls = await YonghuSql.findByZhanghao('admin');
   if (!ls)
   {
     let yonghu = new Yonghu();
@@ -15,6 +16,9 @@ async function v001(manager: EntityManager)
   }
 }
 
+/**
+ * 数据库版本
+ */
 export class Shujukubanben
 {
   @Transaction()

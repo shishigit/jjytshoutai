@@ -1,10 +1,10 @@
-/******************************************************************************
- * 系统运行日志
- ******************************************************************************/
 import { configure, getLogger, Logger } from 'log4js';
 import { peizhiwenjian } from './peizhiwenjian';
 import { LoggerService } from '@nestjs/common';
 
+/**
+ * 系统运行日志
+ */
 class XitongRizhi implements LoggerService
 {
   constructor(private readonly logger: Logger)
