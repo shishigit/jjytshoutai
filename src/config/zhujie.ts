@@ -3,11 +3,16 @@ import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA }
 import { Jiekou } from '../db/jiekou';
 import { rizhi } from './rizhi';
 import { JiekouSql } from '../db/jiekou.sql';
+import { JianQuanLeixing } from './changliang';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
+const PATH_JIANQUAN = 'PATH_JIANQUAN';
 
 const suoyouJiekou: Jiekou[] = [];
 
+/**
+ * 更新数据库中的接口记录
+ */
 export async function gengxinJiekou()
 {
   await Jiekou.update({ qiyong: true }, { qiyong: false });
@@ -21,6 +26,11 @@ export async function gengxinJiekou()
   }
 }
 
+/**
+ * Contrller注解
+ * @param prefixOrOptions URL
+ * @param fenzu 请求分组
+ */
 export function JJYController(prefixOrOptions: string, fenzu: string): ClassDecorator
 {
   const [path, host, scopeOptions] = [prefixOrOptions, undefined, undefined];
@@ -47,6 +57,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
           fenzu,
           Reflect.getMetadata(PATH_SHUOMING, value),
           true,
+          Reflect.getMetadata(PATH_JIANQUAN, value),
         );
         suoyouJiekou.push(jiekou);
       });
@@ -62,7 +73,9 @@ const RequestMapping = function(
     {
       [PATH_METADATA]: '/',
       [METHOD_METADATA]: RequestMethod.GET,
-    }, path_shuoming: string,
+    },
+  path_shuoming: string,
+  path_jianquan: JianQuanLeixing,
 ): MethodDecorator
 {
   const pathMetadata = metadata[PATH_METADATA];
@@ -72,6 +85,7 @@ const RequestMapping = function(
   return function(target: object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
   {
     Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
+    Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
     Reflect.defineMetadata(PATH_METADATA, path, descriptor.value);
     Reflect.defineMetadata(METHOD_METADATA, requestMethod, descriptor.value);
     return descriptor;
@@ -80,12 +94,12 @@ const RequestMapping = function(
 
 const createMappingDecorator = function(method: RequestMethod)
 {
-  return function(path: string, path_shuoming: string): MethodDecorator
+  return function(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
   {
     return RequestMapping({
       [PATH_METADATA]: path,
       [METHOD_METADATA]: method,
-    }, path_shuoming);
+    }, path_shuoming, path_jianquan);
   };
 };
 

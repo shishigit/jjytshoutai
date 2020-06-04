@@ -1,20 +1,12 @@
-/******************************************************************************
- * 开发时候，打印请求
- ******************************************************************************/
 import { rizhi } from './rizhi';
 import { Request, Response } from 'express';
 import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-export function qingqiurizhi(req: Request, res, next)
-{
-  rizhi.verbose(`请求URL： ${req.originalUrl}`);
-  rizhi.verbose(`请求BODY： ${req.body}`);
-  next();
-}
-
-
+/**
+ * 开发时候，打印请求
+ */
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor
 {

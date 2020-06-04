@@ -1,25 +1,47 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { RequestMethod } from '@nestjs/common';
+import { JianQuanLeixing } from '../config/changliang';
 
+/**
+ * 系统提供的接口
+ */
 @Entity()
 export class Jiekou extends BaseEntity
 {
-  @Column()
-  method: 'post' | 'get' | 'all';
-
   @PrimaryGeneratedColumn()
   id: number;
 
+  // 请求方法
+  @Column()
+  method: 'post' | 'get' | 'all';
+
+  // URL
   @Column({ nullable: false, unique: true })
   url: string;
+
+  // 分组
   @Column({ nullable: false })
   fenzu: string;
+
+  // 说明
   @Column({ nullable: false })
   shuoming: string;
+
+  // 启用与否
   @Column({ nullable: false })
   qiyong: boolean;
 
-  constructor(url: string, method: RequestMethod, fenzu: string, shuoming: string, qiyong: boolean)
+  // 鉴权类型
+  @Column({ nullable: false })
+  jianquan: JianQuanLeixing;
+
+  constructor(
+    url: string,
+    method: RequestMethod,
+    fenzu: string,
+    shuoming: string,
+    qiyong: boolean,
+    jianquan: JianQuanLeixing)
   {
     super();
 
@@ -30,5 +52,6 @@ export class Jiekou extends BaseEntity
     this.fenzu = fenzu;
     this.shuoming = shuoming;
     this.qiyong = qiyong;
+    this.jianquan = jianquan;
   }
 }
