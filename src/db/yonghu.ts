@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Juese } from './juese';
 
 /**
  * 系统用户
@@ -20,4 +21,8 @@ export class Yonghu extends BaseEntity
   // 激活
   @Column({ default: true, nullable: false })
   jihuo: boolean;
+
+  @ManyToMany(() => Juese, juese => juese.yonghus)
+  @JoinTable()
+  jueses: Juese[];
 }

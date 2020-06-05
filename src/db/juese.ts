@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Yonghu } from './yonghu';
 
 @Entity()
 export class Juese
@@ -13,4 +14,7 @@ export class Juese
   // 名称
   @Column({ width: 200, nullable: false, unique: true })
   shuoming: string;
+
+  @ManyToMany(() => Yonghu, yonghu => yonghu.jueses)
+  yonghus: Yonghu[];
 }
