@@ -1,4 +1,4 @@
-import { Body } from '@nestjs/common';
+import { Body, Session } from '@nestjs/common';
 import { YichangTishi } from '../config/yichang';
 import { Jiami } from '../config/jiami';
 import { JJYController, JJYPost } from '../config/zhujie';
@@ -11,6 +11,7 @@ export class CtrlXitong
   async denglu(
     @Body('zhanghao') zhanghao: string,
     @Body('mima')mima: string,
+    @Session() session: any,
   )
   {
     if (!zhanghao) throw  new YichangTishi('账号不能为空');
