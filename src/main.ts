@@ -7,6 +7,7 @@ import { HttpYichang } from './config/yichang';
 import { Shujukubanben } from './config/shujukubanben';
 import { gengxinJiekou } from './config/zhujie';
 import { Shouwei } from './config/shouwei';
+import { redissession } from './config/redis.session';
 
 async function bootstrap()
 {
@@ -15,6 +16,7 @@ async function bootstrap()
   if (peizhiwenjian.kaifa) app.useGlobalInterceptors(new KaifaRizhi());
   app.useGlobalFilters(new HttpYichang());
   app.useGlobalGuards(new Shouwei());
+  app.use(redissession);
 
   await gengxinJiekou();
   await Shujukubanben.tongbushuju();

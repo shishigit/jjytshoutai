@@ -13,9 +13,11 @@
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/typeorm": "^7.1.0",
     "bcrypt": "^4.0.1",
+    "connect-redis": "^4.0.4",
     "express-session": "^1.17.1",
     "log4js": "^6.3.0",
     "mysql": "^2.18.1",
+    "redis": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.4",
     "typeorm": "^0.2.25"
