@@ -1,5 +1,4 @@
 import { Yonghu } from './yonghu';
-import { Juese } from './juese';
 
 export class YonghuSql
 {
@@ -8,8 +7,4 @@ export class YonghuSql
     return Yonghu.findOne({ where: { zhanghao } });
   }
 
-  static findJuese(yonghu: Yonghu)
-  {
-    return Juese.find({ where: { yonghus: yonghu } });
-  }
 }

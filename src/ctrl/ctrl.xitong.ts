@@ -5,7 +5,7 @@ import { JJYController, JJYPost } from '../config/zhujie';
 import { YonghuSql } from '../db/yonghu.sql';
 import { JJYSession } from '../config/redis.session';
 import { Yonghu } from '../db/yonghu';
-import { JueseSql } from '../db/juese.sql';
+import { JiekouSql } from '../db/jiekou.sql';
 
 @JJYController('xitong', '系统级别的接口')
 export class CtrlXitong
@@ -25,9 +25,12 @@ export class CtrlXitong
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
     session.yonghu = yonghu;
-    let jueses = await YonghuSql.findJuese(yonghu);
-    let jiekous = await JueseSql.findJiekou(jueses);
-    session.jiekous = jiekous;
+    let juesesid = (await yonghu.jueses).map(value => value.id);
+    let jiekous = await JiekouSql.findByJueseids(juesesid);
+    session.jiekous = jiekous.map(value =>
+    {
+      return { url: value.url, jianquan: value.jianquan };
+    });
     return {};
   }
 }

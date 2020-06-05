@@ -13,4 +13,18 @@ export class JiekouSql
   {
     await Jiekou.update({ url: jiekou.url }, jiekou);
   }
+
+  static async findByJueseids(juesesid: number[]): Promise<Jiekou[]>
+  {
+    return Jiekou.query(`
+        select *
+        from jiekou
+        where id in
+              (
+                  select jiekouId
+                  from juese_jiekou
+                  where jueseId in (?)
+              )
+    `, [juesesid.join(',')]);
+  }
 }
