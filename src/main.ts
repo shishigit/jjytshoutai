@@ -19,7 +19,6 @@ async function bootstrap()
   await gengxinJiekou();
   await Shujukubanben.tongbushuju();
 
-
   await app.listen(peizhiwenjian.duankou);
 }
 
