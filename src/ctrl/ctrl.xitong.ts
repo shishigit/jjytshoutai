@@ -3,6 +3,7 @@ import { YichangTishi } from '../config/yichang';
 import { Jiami } from '../config/jiami';
 import { JJYController, JJYPost } from '../config/zhujie';
 import { YonghuSql } from '../db/yonghu.sql';
+import { JJYSession } from '../config/redis.session';
 
 @JJYController('xitong', '系统级别的接口')
 export class CtrlXitong
@@ -11,15 +12,17 @@ export class CtrlXitong
   async denglu(
     @Body('zhanghao') zhanghao: string,
     @Body('mima')mima: string,
-    @Session() session: any,
+    @Session() session: JJYSession,
   )
   {
     if (!zhanghao) throw  new YichangTishi('账号不能为空');
     if (!mima) throw  new YichangTishi('密码不能为空');
     let yonghu = await YonghuSql.findByZhanghao(zhanghao);
-    if (!yonghu) throw new YichangTishi('账号或者密码错误！');
+    if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
     let fuhe = Jiami.fuhe(mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
+
+    session.yonghu = yonghu;
     return {};
   }
 }

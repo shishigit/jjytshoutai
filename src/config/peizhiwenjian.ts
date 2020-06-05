@@ -9,6 +9,7 @@ import { Jiekou } from '../db/jiekou';
 interface Peizhiwenjian
 {
   // 开发环境？生产环境？
+
   kaifa: boolean,
 
   // 监听端口
@@ -21,10 +22,17 @@ interface Peizhiwenjian
   session: {
     maxAge: number;
   };
+
+  // redis
+  redis: {
+    port: number;
+    host: string;
+  };
 }
 
 // 开发环境
 const kaifahuanjing: Peizhiwenjian = {
+  redis: { host: '127.0.0.1', port: 6379 },
   session: { maxAge: 30 * 60 * 1000 },
   duankou: 3100,
   kaifa: true,
@@ -43,6 +51,7 @@ const kaifahuanjing: Peizhiwenjian = {
 // 生产环境
 // noinspection JSUnusedLocalSymbols
 const shengchanhuanjing: Peizhiwenjian = {
+  redis: { host: '127.0.0.1', port: 6379 },
   session: { maxAge: 30 * 60 * 1000 },
   duankou: 3100,
   kaifa: false,
