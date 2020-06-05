@@ -1,13 +1,12 @@
 /**
  *
  */
+import * as redis from 'redis';
+import * as  session from 'express-session';
+import * as  connect_redis from 'connect-redis';
 
-
-const redis = require('redis');
 const redisClient = redis.createClient();
-const session = require('express-session');
-const RedisStore = require('connect-redis')(session);
-
+const RedisStore = connect_redis(session);
 
 export const redissession = session({
   resave: false,
