@@ -1,6 +1,7 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { RequestMethod } from '@nestjs/common';
 import { JianQuanLeixing } from '../config/changliang';
+import { Juese } from './juese';
 
 /**
  * 系统提供的接口
@@ -34,6 +35,9 @@ export class Jiekou extends BaseEntity
   // 鉴权类型
   @Column({ nullable: false })
   jianquan: JianQuanLeixing;
+
+  @ManyToMany(type => Juese, juese => juese.jiekous)
+  jueses: Juese[];
 
   constructor(
     url: string,

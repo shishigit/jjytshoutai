@@ -1,6 +1,10 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Yonghu } from './yonghu';
+import { Jiekou } from './jiekou';
 
+/**
+ * 角色
+ */
 @Entity()
 export class Juese
 {
@@ -17,4 +21,8 @@ export class Juese
 
   @ManyToMany(() => Yonghu, yonghu => yonghu.jueses)
   yonghus: Yonghu[];
+
+  @ManyToMany(() => Jiekou, jiekou => jiekou.jueses)
+  @JoinTable({ name: 'juese_jiekou' })
+  jiekous: Jiekou[];
 }

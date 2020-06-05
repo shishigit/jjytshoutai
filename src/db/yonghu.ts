@@ -23,6 +23,6 @@ export class Yonghu extends BaseEntity
   jihuo: boolean;
 
   @ManyToMany(() => Juese, juese => juese.yonghus)
-  @JoinTable()
+  @JoinTable({ name: 'yonghu_juese' })
   jueses: Juese[];
 }

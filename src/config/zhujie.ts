@@ -8,6 +8,9 @@ import { JianQuanLeixing } from './changliang';
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';
 
+/**
+ * 系统当前包含的所有接口，不含已经废除的接口
+ */
 const suoyouJiekou: Jiekou[] = [];
 
 /**
