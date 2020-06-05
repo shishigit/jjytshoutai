@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { rizhi } from './config/rizhi';
 import { peizhiwenjian } from './config/peizhiwenjian';
 import { LoggingInterceptor } from './config/qingqiurizhi';
-import { HttpExceptionFilter } from './config/yichang';
+import { HttpYichang } from './config/yichang';
 import { Shujukubanben } from './config/shujukubanben';
 import { gengxinJiekou } from './config/zhujie';
 import { Shouwei } from './config/shouwei';
@@ -13,7 +13,7 @@ async function bootstrap()
   const app = await NestFactory.create(AppModule, { logger: rizhi });
 
   if (peizhiwenjian.kaifa) app.useGlobalInterceptors(new LoggingInterceptor());
-  app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalFilters(new HttpYichang());
   app.useGlobalGuards(new Shouwei());
 
   await gengxinJiekou();

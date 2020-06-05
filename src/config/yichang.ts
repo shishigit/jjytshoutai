@@ -5,7 +5,7 @@ import { Response } from 'express';
  * HTTP 异常处理器
  */
 @Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter
+export class HttpYichang implements ExceptionFilter
 {
   catch(exception: HttpException, host: ArgumentsHost)
   {
