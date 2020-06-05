@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Yonghu } from './yonghu';
 import { Jiekou } from './jiekou';
 
@@ -6,7 +6,7 @@ import { Jiekou } from './jiekou';
  * 角色
  */
 @Entity()
-export class Juese
+export class Juese extends BaseEntity
 {
   @PrimaryGeneratedColumn()
   id: number;

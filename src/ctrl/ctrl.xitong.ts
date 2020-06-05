@@ -4,6 +4,8 @@ import { Jiami } from '../config/jiami';
 import { JJYController, JJYPost } from '../config/zhujie';
 import { YonghuSql } from '../db/yonghu.sql';
 import { JJYSession } from '../config/redis.session';
+import { Yonghu } from '../db/yonghu';
+import { JueseSql } from '../db/juese.sql';
 
 @JJYController('xitong', '系统级别的接口')
 export class CtrlXitong
@@ -17,12 +19,15 @@ export class CtrlXitong
   {
     if (!zhanghao) throw  new YichangTishi('账号不能为空');
     if (!mima) throw  new YichangTishi('密码不能为空');
-    let yonghu = await YonghuSql.findByZhanghao(zhanghao);
+    let yonghu: Yonghu = await YonghuSql.findByZhanghao(zhanghao);
     if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
     let fuhe = Jiami.fuhe(mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
     session.yonghu = yonghu;
+    let jueses = await YonghuSql.findJuese(yonghu);
+    let jiekous = await JueseSql.findJiekou(jueses);
+    session.jiekous = jiekous;
     return {};
   }
 }

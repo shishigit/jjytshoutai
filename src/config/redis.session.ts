@@ -5,7 +5,7 @@ import * as redis from 'redis';
 import * as  session from 'express-session';
 import * as  connect_redis from 'connect-redis';
 import { peizhiwenjian } from './peizhiwenjian';
-import { Yonghu } from '../db/yonghu';
+import { JianQuanLeixing } from './changliang';
 
 
 const redisClient = redis.createClient({
@@ -27,5 +27,9 @@ export const redissession = session({
 
 export interface JJYSession
 {
-  yonghu?: Yonghu
+  jiekous: Array<{ url: string, jianquan: JianQuanLeixing }>;
+  yonghu: {
+    id: number,
+    zhanghao: string
+  }
 }
