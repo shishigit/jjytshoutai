@@ -8,7 +8,7 @@ import { tap } from 'rxjs/operators';
  * 开发时候，打印请求
  */
 @Injectable()
-export class LoggingInterceptor implements NestInterceptor
+export class KaifaRizhi implements NestInterceptor
 {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any>
   {
