@@ -6,6 +6,7 @@ import { LoggingInterceptor } from './config/qingqiurizhi';
 import { HttpExceptionFilter } from './config/yichang';
 import { Shujukubanben } from './config/shujukubanben';
 import { gengxinJiekou } from './config/zhujie';
+import { Shouwei } from './config/shouwei';
 
 async function bootstrap()
 {
@@ -13,9 +14,11 @@ async function bootstrap()
 
   if (peizhiwenjian.kaifa) app.useGlobalInterceptors(new LoggingInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
+  app.useGlobalGuards(new Shouwei());
 
   await gengxinJiekou();
   await Shujukubanben.tongbushuju();
+
 
   await app.listen(peizhiwenjian.duankou);
 }
