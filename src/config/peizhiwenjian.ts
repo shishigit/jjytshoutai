@@ -16,10 +16,16 @@ interface Peizhiwenjian
 
   // 数据库
   shujuku: TypeOrmModuleOptions
+
+  // Session
+  session: {
+    maxAge: number;
+  };
 }
 
 // 开发环境
 const kaifahuanjing: Peizhiwenjian = {
+  session: { maxAge: 30 * 60 * 1000 },
   duankou: 3100,
   kaifa: true,
   shujuku: {
@@ -37,6 +43,7 @@ const kaifahuanjing: Peizhiwenjian = {
 // 生产环境
 // noinspection JSUnusedLocalSymbols
 const shengchanhuanjing: Peizhiwenjian = {
+  session: { maxAge: 30 * 60 * 1000 },
   duankou: 3100,
   kaifa: false,
   shujuku: {
