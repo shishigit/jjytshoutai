@@ -24,5 +24,5 @@ export class Juese extends BaseEntity
 
   @ManyToMany(() => Jiekou, jiekou => jiekou.jueses)
   @JoinTable({ name: 'juese_jiekou' })
-  jiekous: Promise<Jiekou[]>;
+  jiekous: Jiekou[];
 }
