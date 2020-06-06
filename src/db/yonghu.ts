@@ -24,5 +24,5 @@ export class Yonghu extends BaseEntity
 
   @ManyToMany(() => Juese, juese => juese.yonghus)
   @JoinTable({ name: 'yonghu_juese' })
-  jueses: Promise<Juese[]>;
+  jueses: Juese[];
 }

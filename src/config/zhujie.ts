@@ -29,6 +29,7 @@ export async function gengxinJiekou()
       await jiekou.save();
   }
 
+  // 更新超级管理员接口
   let qiyongjiekou = await JiekouSql.findByQiyong(true);
   let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
   if (!chaojiguanliyuan)

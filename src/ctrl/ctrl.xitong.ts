@@ -6,6 +6,7 @@ import { YonghuSql } from '../db/yonghu.sql';
 import { JJYSession } from '../config/redis.session';
 import { Yonghu } from '../db/yonghu';
 import { JiekouSql } from '../db/jiekou.sql';
+import { JueseSql } from '../db/juese.sql';
 
 @JJYController('xitong', '系统级别的接口')
 export class CtrlXitong
@@ -25,7 +26,7 @@ export class CtrlXitong
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
     session.yonghu = yonghu;
-    let juesesid = (await yonghu.jueses).map(value => value.id);
+    let juesesid = (await JueseSql.findByYonghuId(yonghu.id)).map(value => value.id);
     let jiekous = await JiekouSql.findByJueseids(juesesid);
     session.jiekous = jiekous.map(value =>
     {

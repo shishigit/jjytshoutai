@@ -47,7 +47,7 @@ async function v003(manager: EntityManager)
     process.exit();
   }
 
-  let jueses = await admin.jueses;
+  let jueses = await JueseSql.findByYonghuId(admin.id);
   let yiguanlian = jueses.map(value => value.id).includes(chaojiguanliyuan.id);
   if (!yiguanlian)
   {
