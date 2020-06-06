@@ -2,12 +2,12 @@ import { Juese } from './juese';
 
 export class JueseSql
 {
-  static findByMingcheng(mingcheng: string)
+  static findByMingcheng(mingcheng: string): Promise<Juese>
   {
     return Juese.findOne({ where: { mingcheng } });
   }
 
-  static findByYonghuId(yonghuid: number)
+  static findByYonghuId(yonghuid: number): Promise<Juese[]>
   {
     return Juese.query(`
         select *

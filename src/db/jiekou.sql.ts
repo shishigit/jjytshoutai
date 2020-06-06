@@ -28,7 +28,7 @@ export class JiekouSql
     `, [juesesid.join(',')]);
   }
 
-  static findByQiyong(qiyong: boolean)
+  static findByQiyong(qiyong: boolean): Promise<Jiekou[]>
   {
     return Jiekou.find({ where: { qiyong } });
   }
