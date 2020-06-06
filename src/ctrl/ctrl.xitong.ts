@@ -25,12 +25,12 @@ export class CtrlXitong
     let fuhe = Jiami.fuhe(mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
-    session.yonghu = yonghu;
+    session.yonghu = { id: yonghu.id, zhanghao: yonghu.zhanghao };
     let juesesid = (await JueseSql.findByYonghuId(yonghu.id)).map(value => value.id);
     let jiekous = await JiekouSql.findByJueseids(juesesid);
     session.jiekous = jiekous
       .filter(value => value.jianquan === 'jianquan' && value.qiyong)
       .map(value => value.url);
-    return jiekous;
+    return jiekous.filter(value => value.qiyong);
   }
 }
