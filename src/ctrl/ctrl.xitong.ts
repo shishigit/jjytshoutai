@@ -28,10 +28,9 @@ export class CtrlXitong
     session.yonghu = yonghu;
     let juesesid = (await JueseSql.findByYonghuId(yonghu.id)).map(value => value.id);
     let jiekous = await JiekouSql.findByJueseids(juesesid);
-    session.jiekous = jiekous.map(value =>
-    {
-      return { url: value.url, jianquan: value.jianquan };
-    });
-    return {};
+    session.jiekous = jiekous
+      .filter(value => value.jianquan === 'jianquan' && value.qiyong)
+      .map(value => value.url);
+    return jiekous;
   }
 }
