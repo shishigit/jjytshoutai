@@ -4,6 +4,7 @@ import { Jiekou } from '../db/jiekou';
 import { rizhi } from './rizhi';
 import { JiekouSql } from '../db/jiekou.sql';
 import { JianQuanLeixing } from './changliang';
+import { JueseSql } from '../db/juese.sql';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';
@@ -27,6 +28,19 @@ export async function gengxinJiekou()
     else
       await jiekou.save();
   }
+
+  let qiyongjiekou = await JiekouSql.findByQiyong(true);
+  let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
+  if (!chaojiguanliyuan)
+  {
+    rizhi.error('超级管理员角色不存在');
+    process.exit();
+  }
+
+  let chaojijiekou = await chaojiguanliyuan.jiekous;
+  chaojijiekou = qiyongjiekou;
+  await chaojiguanliyuan.save();
+
 }
 
 /**

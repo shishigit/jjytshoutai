@@ -27,4 +27,9 @@ export class JiekouSql
               )
     `, [juesesid.join(',')]);
   }
+
+  static async findByQiyong(qiyong: boolean)
+  {
+    return Jiekou.find({ where: { qiyong: true } });
+  }
 }
