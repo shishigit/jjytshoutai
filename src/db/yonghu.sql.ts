@@ -6,5 +6,4 @@ export class YonghuSql
   {
     return Yonghu.findOne({ where: { zhanghao } });
   }
-
 }
