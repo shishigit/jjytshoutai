@@ -30,6 +30,6 @@ export class JiekouSql
 
   static async findByQiyong(qiyong: boolean)
   {
-    return Jiekou.find({ where: { qiyong: true } });
+    return Jiekou.find({ where: { qiyong } });
   }
 }

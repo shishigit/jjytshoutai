@@ -40,7 +40,6 @@ export async function gengxinJiekou()
   let chaojijiekou = await chaojiguanliyuan.jiekous;
   chaojijiekou = qiyongjiekou;
   await chaojiguanliyuan.save();
-
 }
 
 /**
