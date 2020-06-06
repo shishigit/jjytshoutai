@@ -37,7 +37,7 @@ export class Jiekou extends BaseEntity
   jianquan: JianQuanLeixing;
 
   @ManyToMany(type => Juese, juese => juese.jiekous)
-  jueses: Promise<Juese[]>;
+  jueses: Juese[];
 
   constructor(
     url: string,

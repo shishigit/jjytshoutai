@@ -9,12 +9,12 @@ export class JiekouSql
     return !!ls;
   }
 
-  static async updateByUrl(jiekou: Jiekou)
+  static updateByUrl(jiekou: Jiekou)
   {
-    await Jiekou.update({ url: jiekou.url }, jiekou);
+    return Jiekou.update({ url: jiekou.url }, jiekou);
   }
 
-  static async findByJueseids(juesesid: number[]): Promise<Jiekou[]>
+  static findByJueseids(juesesid: number[]): Promise<Jiekou[]>
   {
     return Jiekou.query(`
         select *
@@ -28,7 +28,7 @@ export class JiekouSql
     `, [juesesid.join(',')]);
   }
 
-  static async findByQiyong(qiyong: boolean)
+  static findByQiyong(qiyong: boolean)
   {
     return Jiekou.find({ where: { qiyong } });
   }

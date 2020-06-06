@@ -20,7 +20,7 @@ export class Juese extends BaseEntity
   shuoming: string;
 
   @ManyToMany(() => Yonghu, yonghu => yonghu.jueses)
-  yonghus: Promise<Yonghu[]>;
+  yonghus: Yonghu[];
 
   @ManyToMany(() => Jiekou, jiekou => jiekou.jueses)
   @JoinTable({ name: 'juese_jiekou' })
