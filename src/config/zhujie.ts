@@ -1,5 +1,5 @@
-import { Post, RequestMappingMetadata, RequestMethod } from '@nestjs/common';
-import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
+import { All, Controller, Get, Post, RequestMethod } from '@nestjs/common';
+import { METHOD_METADATA, PATH_METADATA } from '@nestjs/common/constants';
 import { Jiekou } from '../db/jiekou';
 import { JiekouSql } from '../db/jiekou.sql';
 import { JianQuanLeixing } from './changliang';
@@ -45,9 +45,7 @@ export async function gengxinJiekou()
  */
 export function JJYController(prefixOrOptions: string, fenzu: string): ClassDecorator
 {
-  const [path, host, scopeOptions] = [prefixOrOptions, undefined, undefined];
-
-  return (target: object) =>
+  return function(target: object)
   {
     Object
       .getOwnPropertyNames((target as any).prototype)
@@ -56,7 +54,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
       .filter(value => Reflect.hasMetadata(PATH_SHUOMING, value))
       .forEach(value =>
       {
-        let url = `/${path}/${Reflect.getMetadata(PATH_METADATA, value)}`;
+        let url = `/${prefixOrOptions}/${Reflect.getMetadata(PATH_METADATA, value)}`;
         if (url.includes('//')) throw new YichangXitongTuichu('`错误的URL：${url}`');
 
         let jiekou = new Jiekou(
@@ -70,47 +68,11 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
         suoyouJiekou.push(jiekou);
       });
 
-    Reflect.defineMetadata(PATH_METADATA, path, target);
-    Reflect.defineMetadata(HOST_METADATA, host, target);
-    Reflect.defineMetadata(SCOPE_OPTIONS_METADATA, scopeOptions, target);
+    Controller(prefixOrOptions)(target as any);
   };
 }
 
-const RequestMapping = function(
-  metadata: RequestMappingMetadata =
-    {
-      [PATH_METADATA]: '/',
-      [METHOD_METADATA]: RequestMethod.GET,
-    },
-  path_shuoming: string,
-  path_jianquan: JianQuanLeixing,
-): MethodDecorator
-{
-  const pathMetadata = metadata[PATH_METADATA];
-  const path = pathMetadata && pathMetadata.length ? pathMetadata : '/';
-  const requestMethod = metadata[METHOD_METADATA] || RequestMethod.GET;
-
-  return function(target: object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
-  {
-    Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
-    Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
-    Reflect.defineMetadata(PATH_METADATA, path, descriptor.value);
-    Reflect.defineMetadata(METHOD_METADATA, requestMethod, descriptor.value);
-    return descriptor;
-  };
-};
-
-const createMappingDecorator = function(method: RequestMethod)
-{
-  return function(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
-  {
-    return RequestMapping({
-      [PATH_METADATA]: path,
-      [METHOD_METADATA]: method,
-    }, path_shuoming, path_jianquan);
-  };
-};
-
+// noinspection JSUnusedGlobalSymbols
 export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
 {
   return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
@@ -123,6 +85,25 @@ export function JJYPost(path: string, path_shuoming: string, path_jianquan: Jian
 }
 
 // noinspection JSUnusedGlobalSymbols
-export const JJYGet = createMappingDecorator(RequestMethod.GET);
+export function JJYGet(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
+{
+  return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
+  {
+    Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
+    Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
+    Get(path)(target, key, descriptor);
+    return descriptor;
+  };
+}
+
 // noinspection JSUnusedGlobalSymbols
-export const JJYAll = createMappingDecorator(RequestMethod.ALL);
+export function JJYAll(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
+{
+  return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
+  {
+    Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
+    Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
+    All(path)(target, key, descriptor);
+    return descriptor;
+  };
+}
