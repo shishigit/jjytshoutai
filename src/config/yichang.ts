@@ -33,3 +33,14 @@ export class YichangTishi extends HttpException
     super(xinxi, 600);
   }
 }
+
+/**
+ * 系统退出异常，抛出此异常后，系统将退出运行
+ */
+export class YichangXitongTuichu extends Error
+{
+  constructor(message: string)
+  {
+    super(message);
+  }
+}

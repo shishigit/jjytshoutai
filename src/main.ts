@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { rizhi } from './config/rizhi';
 import { peizhiwenjian } from './config/peizhiwenjian';
 import { KaifaRizhi } from './config/qingqiurizhi';
-import { HttpYichang } from './config/yichang';
+import { HttpYichang, YichangXitongTuichu } from './config/yichang';
 import { Shujukubanben } from './config/shujukubanben';
 import { gengxinJiekou } from './config/zhujie';
 import { Shouwei } from './config/shouwei';
@@ -18,8 +18,8 @@ async function bootstrap()
   app.useGlobalGuards(new Shouwei());
   app.use(redissession);
 
-  await gengxinJiekou();
   await Shujukubanben.tongbushuju();
+  await gengxinJiekou();
 
   await app.listen(peizhiwenjian.duankou);
 }
@@ -30,4 +30,5 @@ bootstrap()
   {
     rizhi.error('系统异常');
     rizhi.error(err);
+    if (err instanceof YichangXitongTuichu) process.exit();
   });

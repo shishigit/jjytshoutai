@@ -1,4 +1,4 @@
-import { RequestMappingMetadata, RequestMethod } from '@nestjs/common';
+import { Post, RequestMappingMetadata, RequestMethod } from '@nestjs/common';
 import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
 import { Jiekou } from '../db/jiekou';
 import { rizhi } from './rizhi';
@@ -119,7 +119,17 @@ const createMappingDecorator = function(method: RequestMethod)
   };
 };
 
-export const JJYPost = createMappingDecorator(RequestMethod.POST);
+export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
+{
+  return function(target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
+  {
+    Reflect.defineMetadata(PATH_SHUOMING, path_shuoming, descriptor.value);
+    Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
+    Post(path)(target, key, descriptor);
+    return descriptor;
+  };
+}
+
 // noinspection JSUnusedGlobalSymbols
 export const JJYGet = createMappingDecorator(RequestMethod.GET);
 // noinspection JSUnusedGlobalSymbols

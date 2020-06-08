@@ -5,7 +5,7 @@ import { Jiami } from './jiami';
 import { YonghuSql } from '../db/yonghu.sql';
 import { JueseSql } from '../db/juese.sql';
 import { Juese } from '../db/juese';
-import { rizhi } from './rizhi';
+import { YichangXitongTuichu } from './yichang';
 
 async function v001(manager: EntityManager)
 {
@@ -34,18 +34,11 @@ async function v002(manager: EntityManager)
 async function v003(manager: EntityManager)
 {
   let admin = await YonghuSql.findByZhanghao('admin');
-  if (!admin)
-  {
-    rizhi.error('admin 账号不存在');
-    process.exit();
-  }
+  if (!admin) throw new YichangXitongTuichu('admin 账号不存在');
+
 
   let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
-  if (!chaojiguanliyuan)
-  {
-    rizhi.error('超级管理员角色不存在');
-    process.exit();
-  }
+  if (!chaojiguanliyuan) throw new YichangXitongTuichu('超级管理员角色不存在');
 
   let jueses = await JueseSql.findByYonghuId(admin.id);
   let yiguanlian = jueses.map(value => value.id).includes(chaojiguanliyuan.id);
@@ -61,15 +54,15 @@ async function v003(manager: EntityManager)
  */
 export class Shujukubanben
 {
-  @Transaction()
-  static async tongbushuju(@TransactionManager() manager?: EntityManager)
+  static async tongbushuju()
   {
-    await Shujukubanben.zhixing(v001, '添加系统管理员', manager);
-    await Shujukubanben.zhixing(v002, '添加超级管理员角色', manager);
-    await Shujukubanben.zhixing(v003, 'admin 关联超级管理员角色', manager);
+    await Shujukubanben.zhixing(v001, '添加系统管理员');
+    await Shujukubanben.zhixing(v002, '添加超级管理员角色');
+    await Shujukubanben.zhixing(v003, 'admin 关联超级管理员角色');
   }
 
-  static async zhixing(func: (manager: EntityManager) => Promise<any>, shuoming: string, manager: EntityManager)
+  @Transaction()
+  static async zhixing(func: (manager: EntityManager) => Promise<any>, shuoming: string, @TransactionManager() manager?: EntityManager)
   {
     let yiyou = await Banben.findOne({ where: { banbenhao: func.name } });
     if (!yiyou)
