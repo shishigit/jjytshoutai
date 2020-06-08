@@ -1,10 +1,10 @@
 import { Post, RequestMappingMetadata, RequestMethod } from '@nestjs/common';
 import { HOST_METADATA, METHOD_METADATA, PATH_METADATA, SCOPE_OPTIONS_METADATA } from '@nestjs/common/constants';
 import { Jiekou } from '../db/jiekou';
-import { rizhi } from './rizhi';
 import { JiekouSql } from '../db/jiekou.sql';
 import { JianQuanLeixing } from './changliang';
 import { JueseSql } from '../db/juese.sql';
+import { YichangXitongTuichu } from './yichang';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';
@@ -32,11 +32,7 @@ export async function gengxinJiekou()
   // 更新超级管理员接口
   let qiyongjiekou = await JiekouSql.findByQiyong(true);
   let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
-  if (!chaojiguanliyuan)
-  {
-    rizhi.error('超级管理员角色不存在');
-    process.exit();
-  }
+  if (!chaojiguanliyuan) throw new YichangXitongTuichu('超级管理员角色不存在');
 
   chaojiguanliyuan.jiekous = qiyongjiekou;
   await chaojiguanliyuan.save();
@@ -61,11 +57,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
       .forEach(value =>
       {
         let url = `/${path}/${Reflect.getMetadata(PATH_METADATA, value)}`;
-        if (url.includes('//'))
-        {
-          rizhi.error(`错误的URL：${url}`);
-          process.exit(0);
-        }
+        if (url.includes('//')) throw new YichangXitongTuichu('`错误的URL：${url}`');
 
         let jiekou = new Jiekou(
           url,
