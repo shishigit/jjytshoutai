@@ -45,6 +45,7 @@ async function v003(manager: EntityManager)
   if (!yiguanlian)
   {
     jueses.push(chaojiguanliyuan);
+    admin.jueses = jueses;
     await manager.save(admin);
   }
 }

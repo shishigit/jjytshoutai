@@ -31,6 +31,7 @@ export class CtrlXitong
     session.jiekous = jiekous
       .filter(value => value.jianquan === 'jianquan' && value.qiyong)
       .map(value => value.url);
+
     return jiekous.filter(value => value.qiyong);
   }
 }
