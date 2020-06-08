@@ -26,12 +26,16 @@ export class CtrlXitong
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
     session.yonghu = { id: yonghu.id, zhanghao: yonghu.zhanghao };
+
     let juesesid = (await JueseSql.findByYonghuId(yonghu.id)).map(value => value.id);
     let jiekous = await JiekouSql.findByJueseids(juesesid);
+
     session.jiekous = jiekous
-      .filter(value => value.jianquan === 'jianquan' && value.qiyong)
+      .filter(value => value.jianquan === 'jianquan')
       .map(value => value.url);
 
-    return jiekous.filter(value => value.qiyong);
+    let nimingjiekou = await JiekouSql.findByJianQuan('niming');
+    let denglujiekou = await JiekouSql.findByJianQuan('denglu');
+    return jiekous.filter(value => value.jianquan === 'jianquan').concat(nimingjiekou).concat(denglujiekou);
   }
 }

@@ -1,6 +1,23 @@
-export interface Houtaijiekou
+interface Houtaijiekou
 {
+  fenzu: string,
   url: string,
-  qingqiucanshu: object
-  fanhuijieguo: object
+  canshu: object,
+  fanhui: object,
 }
+
+namespace jiekou
+{
+  export const xitong_denglu: Houtaijiekou = {
+    fenzu: 'xitong',
+    url: 'denglu',
+    canshu: {
+      zhanghao: '',
+      mima: '',
+    },
+    fanhui: [],
+  };
+
+}
+
+export type fenzu11 = keyof Houtaijiekou;

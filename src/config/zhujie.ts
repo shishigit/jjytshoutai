@@ -34,7 +34,7 @@ export async function gengxinJiekou()
   let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
   if (!chaojiguanliyuan) throw new YichangXitongTuichu('超级管理员角色不存在');
 
-  chaojiguanliyuan.jiekous = qiyongjiekou;
+  chaojiguanliyuan.jiekous = qiyongjiekou.filter(value => value.jianquan === 'jianquan');
   await chaojiguanliyuan.save();
 }
 
@@ -55,7 +55,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
       .forEach(value =>
       {
         let url = `/${prefixOrOptions}/${Reflect.getMetadata(PATH_METADATA, value)}`;
-        if (url.includes('//')) throw new YichangXitongTuichu('`错误的URL：${url}`');
+        if (url.includes('//') || url.includes('_')) throw new YichangXitongTuichu(`错误的URL：${url}`);
 
         let jiekou = new Jiekou(
           url,

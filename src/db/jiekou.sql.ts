@@ -1,4 +1,5 @@
 import { Jiekou } from './jiekou';
+import { JianQuanLeixing } from '../config/changliang';
 
 export class JiekouSql
 {
@@ -25,11 +26,17 @@ export class JiekouSql
                   from juese_jiekou
                   where jueseId in (?)
               )
+          and qiyong = true
     `, [juesesid.join(',')]);
   }
 
   static findByQiyong(qiyong: boolean): Promise<Jiekou[]>
   {
     return Jiekou.find({ where: { qiyong } });
+  }
+
+  static async findByJianQuan(jianquan: JianQuanLeixing)
+  {
+    return Jiekou.find({ where: { qiyong: true, jianquan } });
   }
 }
