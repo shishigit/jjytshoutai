@@ -1,5 +1,4 @@
-import { JJYController, JJYPost } from '../config/zhujie';
-import { Body } from '@nestjs/common';
+import { JJYBody, JJYController, JJYPost } from '../config/zhujie';
 import { YichangTishi } from '../config/yichang';
 import { YonghuSql } from '../db/yonghu.sql';
 import { Yonghu } from '../db/yonghu';
@@ -10,7 +9,7 @@ export class CtrlYonghuguanli
 {
   @JJYPost('tianjia', '添加用户', 'jianquan')
   async tianjia(
-    @Body('zhanghao') zhanghao: string,
+    @JJYBody('zhanghao') zhanghao: string,
   )
   {
     if (!zhanghao) throw new YichangTishi('账号不能为空');

@@ -1,7 +1,7 @@
-import { Body, Session } from '@nestjs/common';
+import { Session } from '@nestjs/common';
 import { YichangTishi } from '../config/yichang';
 import { Jiami } from '../config/jiami';
-import { JJYController, JJYPost } from '../config/zhujie';
+import { JJYBody, JJYController, JJYPost } from '../config/zhujie';
 import { YonghuSql } from '../db/yonghu.sql';
 import { JJYSession } from '../config/redis.session';
 import { Yonghu } from '../db/yonghu';
@@ -13,8 +13,8 @@ export class CtrlXitong
 {
   @JJYPost('denglu', '系统登陆接口', 'niming')
   async denglu(
-    @Body('zhanghao') zhanghao: string,
-    @Body('mima')mima: string,
+    @JJYBody('zhanghao') zhanghao: string,
+    @JJYBody('mima')mima: string,
     @Session() session: JJYSession,
   )
   {

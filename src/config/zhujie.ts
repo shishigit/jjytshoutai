@@ -1,10 +1,11 @@
-import { All, Controller, Get, Post, RequestMethod } from '@nestjs/common';
+import { All, Body, Controller, Get, PipeTransform, Post, RequestMethod } from '@nestjs/common';
 import { METHOD_METADATA, PATH_METADATA } from '@nestjs/common/constants';
 import { Jiekou } from '../db/jiekou';
 import { JiekouSql } from '../db/jiekou.sql';
 import { JianQuanLeixing } from './changliang';
 import { JueseSql } from '../db/juese.sql';
 import { YichangXitongTuichu } from './yichang';
+import { Type } from '@nestjs/common/interfaces';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';
@@ -105,5 +106,13 @@ export function JJYAll(path: string, path_shuoming: string, path_jianquan: JianQ
     Reflect.defineMetadata(PATH_JIANQUAN, path_jianquan, descriptor.value);
     All(path)(target, key, descriptor);
     return descriptor;
+  };
+}
+
+export function JJYBody(property: string, ...pipes: (Type<PipeTransform> | PipeTransform)[]): ParameterDecorator
+{
+  return function(target: Object, propertyKey: string | symbol, parameterIndex: number)
+  {
+    Body(property, ...pipes)(target, propertyKey, parameterIndex);
   };
 }
