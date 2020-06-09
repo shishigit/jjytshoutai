@@ -7,22 +7,30 @@ import { JJYSession } from '../config/redis.session';
 import { Yonghu } from '../db/yonghu';
 import { JiekouSql } from '../db/jiekou.sql';
 import { JueseSql } from '../db/juese.sql';
+import { ApiProperty } from '@nestjs/swagger';
 
-@JJYController('xitong', '系统级别的接口')
+class CanshuXitongDenglu
+{
+  @ApiProperty({ required: true })
+  zhanghao: string;
+  @ApiProperty()
+  mima: string;
+}
+
+@JJYController('xitong', '系统接口')
 export class CtrlXitong
 {
-  @JJYPost('denglu', '系统登陆接口', 'niming')
+  @JJYPost('denglu', '系统登陆', 'niming')
   async denglu(
-    @JJYBody('zhanghao') zhanghao: string,
-    @JJYBody('mima') mima: string,
+    @JJYBody() canshu: CanshuXitongDenglu,
     @Session() session: JJYSession,
   )
   {
-    if (!zhanghao) throw  new YichangTishi('账号不能为空');
-    if (!mima) throw  new YichangTishi('密码不能为空');
-    let yonghu: Yonghu = await YonghuSql.findByZhanghao(zhanghao);
+    if (!canshu.zhanghao) throw  new YichangTishi('账号不能为空');
+    if (!canshu.mima) throw  new YichangTishi('密码不能为空');
+    let yonghu: Yonghu = await YonghuSql.findByZhanghao(canshu.zhanghao);
     if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
-    let fuhe = Jiami.fuhe(mima, yonghu.mima);
+    let fuhe = Jiami.fuhe(canshu.mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
     session.yonghu = { id: yonghu.id, zhanghao: yonghu.zhanghao };

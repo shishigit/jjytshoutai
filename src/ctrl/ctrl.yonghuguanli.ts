@@ -4,7 +4,7 @@ import { YonghuSql } from '../db/yonghu.sql';
 import { Yonghu } from '../db/yonghu';
 import { Jiami } from '../config/jiami';
 
-@JJYController('yonghu', '用户管理的接口')
+@JJYController('yonghu', '用户管理接口')
 export class CtrlYonghuguanli
 {
   @JJYPost('tianjia', '添加用户', 'jianquan')

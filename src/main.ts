@@ -14,20 +14,23 @@ async function bootstrap()
 {
   const app = await NestFactory.create(AppModule, { logger: rizhi });
 
-  if (peizhiwenjian.kaifa) app.useGlobalInterceptors(new KaifaRizhi());
+  if (peizhiwenjian.kaifa)
+  {
+    app.useGlobalInterceptors(new KaifaRizhi());
+    const options = new DocumentBuilder()
+      .setTitle('测试接口')
+      .setDescription('测试接口')
+      .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api', app, document);
+  }
+
   app.useGlobalFilters(new HttpYichang());
   app.useGlobalGuards(new Shouwei());
   app.use(redissession);
 
   await Shujukubanben.tongbushuju();
   await gengxinJiekou();
-
-  const options = new DocumentBuilder()
-    .setTitle('测试接口')
-    .setDescription('测试接口')
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('api', app, document);
 
   await app.listen(peizhiwenjian.duankou);
 }
