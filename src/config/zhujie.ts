@@ -109,7 +109,7 @@ export function JJYAll(path: string, path_shuoming: string, path_jianquan: JianQ
   };
 }
 
-export function JJYBody(property: string, ...pipes: (Type<PipeTransform> | PipeTransform)[]): ParameterDecorator
+export function JJYBody(property?: string, ...pipes: (Type<PipeTransform> | PipeTransform)[]): ParameterDecorator
 {
   return function(target: Object, propertyKey: string | symbol, parameterIndex: number)
   {
