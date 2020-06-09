@@ -14,7 +14,7 @@ export class CtrlXitong
   @JJYPost('denglu', '系统登陆接口', 'niming')
   async denglu(
     @JJYBody('zhanghao') zhanghao: string,
-    @JJYBody('mima')mima: string,
+    @JJYBody('mima') mima: string,
     @Session() session: JJYSession,
   )
   {
