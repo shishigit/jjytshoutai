@@ -8,6 +8,7 @@ import { Shujukubanben } from './config/shujukubanben';
 import { gengxinJiekou } from './config/zhujie';
 import { Shouwei } from './config/shouwei';
 import { redissession } from './config/redis.session';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap()
 {
@@ -16,6 +17,12 @@ async function bootstrap()
   if (peizhiwenjian.kaifa)
   {
     app.useGlobalInterceptors(new KaifaRizhi());
+    const options = new DocumentBuilder()
+      .setTitle('测试接口')
+      .setDescription('测试接口')
+      .build();
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api', app, document);
   }
 
   app.useGlobalFilters(new HttpYichang());
