@@ -6,7 +6,6 @@ import { JianQuanLeixing } from './changliang';
 import { JueseSql } from '../db/juese.sql';
 import { YichangXitongTuichu } from './yichang';
 import { Type } from '@nestjs/common/interfaces';
-import { ApiTags } from '@nestjs/swagger';
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';
@@ -69,7 +68,6 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
         );
         suoyouJiekou.push(jiekou);
       });
-    ApiTags(fenzu)(target as any);
     Controller(prefixOrOptions)(target as any);
   };
 }
