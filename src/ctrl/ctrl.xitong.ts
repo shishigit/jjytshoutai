@@ -42,8 +42,6 @@ export class CtrlXitong
       .filter(value => value.jianquan === 'jianquan')
       .map(value => value.url);
 
-    let nimingjiekou = await JiekouSql.findByJianQuan('niming');
-    let denglujiekou = await JiekouSql.findByJianQuan('denglu');
-    return jiekous.filter(value => value.jianquan === 'jianquan').concat(nimingjiekou).concat(denglujiekou);
+    return jiekous.filter(value => value.jianquan === 'jianquan');
   }
 }
