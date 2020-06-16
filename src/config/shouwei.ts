@@ -12,7 +12,7 @@ export class Shouwei implements CanActivate
         const request = context.switchToHttp().getRequest();
         let session: JJYSession = request.session;
         //todo
-        console.log(session)
+        // console.log(session)
         return true;
     }
 }
