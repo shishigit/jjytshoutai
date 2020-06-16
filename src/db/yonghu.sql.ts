@@ -11,4 +11,9 @@ export class YonghuSql
     {
         return Yonghu.findAndCount()
     }
+
+    static findById(id: number)
+    {
+        return Yonghu.findOne({id})
+    }
 }

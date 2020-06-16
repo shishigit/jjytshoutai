@@ -8,7 +8,7 @@ import {StringUtil} from "../config/gongju";
 @JJYController('yonghu', '用户管理接口')
 export class CtrlYonghuguanli
 {
-    @JJYPost('tianjia', '添加用户', 'jianquan')
+    @JJYPost('tianjia', '添加用户')
     async tianjia(
         @JJYBody('zhanghao') zhanghao: string,
     )
@@ -26,11 +26,26 @@ export class CtrlYonghuguanli
         await yonghu.save();
     }
 
-    @JJYPost('chaxun', '查询用户', 'jianquan')
+    @JJYPost('chaxun', '查询用户')
     async chaxun()
     {
         let ret = await YonghuSql.findAndCount();
         ret[0].forEach(value => delete value.mima)
         return ret
+    }
+
+    @JJYPost('jihuo', '激活用户')
+    async jihuo(
+        @JJYBody('id') id: number,
+        @JJYBody('jihuo') jihuo: boolean,
+        @JJYBody('jihuo1') jihuo1: boolean,
+    )
+    {
+        if (!id) throw new YichangTishi('没有选取操作的用户！');
+        if (jihuo === undefined) throw new YichangTishi('没有指明是否激活！');
+        let yonghu = await YonghuSql.findById(id);
+        if (!yonghu) throw new YichangTishi('没有找到该用户！')
+        yonghu.jihuo = jihuo;
+        await yonghu.save()
     }
 }
