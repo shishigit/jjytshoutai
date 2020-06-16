@@ -21,7 +21,7 @@ const suoyouJiekou: Jiekou[] = [];
  */
 export async function gengxinJiekou()
 {
-    await Jiekou.update({qiyong: true}, {qiyong: false});
+    await JiekouSql.update({qiyong: false}, {qiyong: false});
 
     for (const jiekou of suoyouJiekou)
     {
