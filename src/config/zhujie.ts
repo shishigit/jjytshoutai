@@ -75,7 +75,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
+export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing = 'jianquan'): MethodDecorator
 {
     return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
