@@ -8,29 +8,24 @@ import {JiekouSql} from '../db/jiekou.sql';
 import {JueseSql} from '../db/juese.sql';
 import {jiami} from "../config/gongju";
 
-class CanshuXitongDenglu
-{
-  zhanghao: string;
-  mima: string;
-}
-
 @JJYController('xitong', '系统接口')
 export class CtrlXitong
 {
   @JJYPost('denglu', '系统登陆', 'niming')
   async denglu(
-    @JJYBody() canshu: CanshuXitongDenglu,
-    @Session() session: JJYSession,
+      @JJYBody('zhanghao') zhanghao: string,
+      @JJYBody('mima') mima: string,
+      @Session() session: JJYSession,
   )
   {
-    if (!canshu.zhanghao) throw  new YichangTishi('账号不能为空');
-    if (!canshu.mima) throw  new YichangTishi('密码不能为空');
-    let yonghu: Yonghu = await YonghuSql.findByZhanghao(canshu.zhanghao);
+    if (!zhanghao) throw  new YichangTishi('账号不能为空');
+    if (!mima) throw  new YichangTishi('密码不能为空');
+    let yonghu: Yonghu = await YonghuSql.findByZhanghao(zhanghao);
     if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
-    let fuhe = jiami.fuhe(canshu.mima, yonghu.mima);
+    let fuhe = jiami.fuhe(mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
-    session.yonghu = { id: yonghu.id, zhanghao: yonghu.zhanghao };
+    session.yonghu = {id: yonghu.id, zhanghao: yonghu.zhanghao};
 
     let juesesid = (await JueseSql.findByYonghuId(yonghu.id)).map(value => value.id);
     let jiekous = await JiekouSql.findByJueseids(juesesid);
