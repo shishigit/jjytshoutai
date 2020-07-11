@@ -69,6 +69,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
                 );
                 suoyouJiekou.push(jiekou);
             });
+
         ApiTags(fenzu)(target as any);
         Controller(prefixOrOptions)(target as any);
     };
