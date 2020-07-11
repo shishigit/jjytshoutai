@@ -47,7 +47,8 @@ export class CtrlXitong
                     method: value.method,
                     qiyong: value.qiyong,
                     shuoming: value.shuoming,
-                    url: value.url
+                    url: value.url,
+                    jianquan: value.jianquan
                 }))
 
         return ret;

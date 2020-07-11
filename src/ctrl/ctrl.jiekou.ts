@@ -34,5 +34,7 @@ export namespace xitong
         shuoming: string;
         // 请求URL
         url: string;
+        // 鉴权
+        jianquan: string
     }
 }
