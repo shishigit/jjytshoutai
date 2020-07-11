@@ -50,4 +50,5 @@ configure({
         shengchan: {appenders: ['shengchan'], level: 'info'},
     },
 });
+
 export const rizhi = new XitongRizhi(getLogger(peizhiwenjian.kaifa ? 'default' : 'shengchan'));

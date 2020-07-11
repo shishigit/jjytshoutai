@@ -1,18 +1,18 @@
-/**
- * Session
- */
 import * as redis from 'redis';
-import * as  session from 'express-session';
-import * as  connect_redis from 'connect-redis';
+import * as session from 'express-session';
+import * as connect_redis from 'connect-redis';
 import {peizhiwenjian} from './peizhiwenjian';
-
 
 const redisClient = redis.createClient({
     host: peizhiwenjian.redis.host,
     port: peizhiwenjian.redis.port,
 });
+
 const RedisStore = connect_redis(session);
 
+/**
+ * Session
+ */
 export const redissession = session({
     cookie: {
         maxAge: peizhiwenjian.session.maxAge,
@@ -24,6 +24,9 @@ export const redissession = session({
     store: new RedisStore({client: redisClient}),
 });
 
+/**
+ * redis 存储的 session 结构
+ */
 export interface JJYSession
 {
     jiekous: Array<string>;

@@ -5,7 +5,7 @@ import {JJYSession} from "./redis.session";
 /**
  * HTTP 鉴权
  */
-export class Shouwei implements CanActivate
+export class HttpJianquan implements CanActivate
 {
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean>
     {

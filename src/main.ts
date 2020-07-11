@@ -4,11 +4,11 @@ import {rizhi} from './config/rizhi';
 import {peizhiwenjian} from './config/peizhiwenjian';
 import {KaifaRizhi} from './config/qingqiurizhi';
 import {HttpYichang, YichangXitongTuichu} from './config/yichang';
-import {Shujukubanben} from './config/shujukubanben';
 import {gengxinJiekou} from './config/zhujie';
-import {Shouwei} from './config/shouwei';
+import {HttpJianquan} from './config/http.jianquan';
 import {redissession} from './config/redis.session';
 import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
+import {shujukubanben} from "./config/shujukubanben";
 
 async function bootstrap()
 {
@@ -26,10 +26,10 @@ async function bootstrap()
     }
 
     app.useGlobalFilters(new HttpYichang());
-    app.useGlobalGuards(new Shouwei());
+    app.useGlobalGuards(new HttpJianquan());
     app.use(redissession);
 
-    await Shujukubanben.tongbushuju();
+    await shujukubanben.tongbushuju();
     await gengxinJiekou();
 
     await app.listen(peizhiwenjian.duankou);
