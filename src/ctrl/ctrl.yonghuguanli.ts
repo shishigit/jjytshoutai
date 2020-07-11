@@ -4,9 +4,9 @@ import {YonghuSql} from '../db/yonghu.sql';
 import {Yonghu} from '../db/yonghu';
 import {jiami, stringUtil} from "../config/gongju";
 import {yonghu} from "./ctrl.jiekou";
-import tianjia = yonghu.tianjiaRes;
-import chaxun = yonghu.chaxunRes;
-import jihuo = yonghu.jihuoRes;
+import tianjiaRes = yonghu.tianjiaRes;
+import chaxunRes = yonghu.chaxunRes;
+import jihuoRes = yonghu.jihuoRes;
 import jihuoReq = yonghu.jihuoReq;
 import chaxunReq = yonghu.chaxunReq;
 import tianjiaReq = yonghu.tianjiaReq;
@@ -18,7 +18,7 @@ export class CtrlYonghuguanli
     @JJYPost('chaxun', '查询用户')
     async chaxun(
         @JJYBody() body: chaxunReq,
-    ): Promise<chaxun>
+    ): Promise<chaxunRes>
     {
         let ls = await YonghuSql.findAndCount();
 
@@ -38,7 +38,7 @@ export class CtrlYonghuguanli
     @JJYPost('jihuo', '激活用户')
     async jihuo(
         @JJYBody() body: jihuoReq,
-    ): Promise<jihuo>
+    ): Promise<jihuoRes>
     {
         if (!body.id) throw new YichangTishi('没有选取操作的用户！');
         if (body.jihuo === undefined) throw new YichangTishi('没有指明是否激活！');
@@ -46,12 +46,13 @@ export class CtrlYonghuguanli
         if (!yonghu) throw new YichangTishi('没有找到该用户！')
         yonghu.jihuo = body.jihuo;
         await yonghu.save()
+        return {}
     }
 
     @JJYPost('tianjia', '添加用户')
     async tianjia(
         @JJYBody() body: tianjiaReq,
-    ): Promise<tianjia>
+    ): Promise<tianjiaRes>
     {
         if (!body.zhanghao || !stringUtil.isZhimuShuzi(body.zhanghao))
             throw new YichangTishi('账号应为字母、数字组合！');
@@ -64,5 +65,6 @@ export class CtrlYonghuguanli
         yonghu.jihuo = true;
         yonghu.mima = jiami.jiami('123456');
         await yonghu.save();
+        return {}
     }
 }

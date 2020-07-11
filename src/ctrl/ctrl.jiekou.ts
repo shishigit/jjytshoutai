@@ -1,6 +1,17 @@
 export namespace yonghu
 {
-    export type tianjiaRes = void
+    export interface shangchuReq
+    {
+        id: number
+    }
+
+    export interface shangchuRes
+    {
+    }
+
+    export interface tianjiaRes
+    {
+    }
 
     export interface tianjiaReq
     {
@@ -25,7 +36,9 @@ export namespace yonghu
 
     }
 
-    export type jihuoRes = void
+    export interface jihuoRes
+    {
+    }
 
     export interface jihuoReq
     {
