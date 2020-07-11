@@ -22,7 +22,7 @@ export class CtrlYonghuguanli
         @JJYBody() body: chaxunReq,
     ): Promise<chaxunRes>
     {
-        let ls = await YonghuSql.findAndCount();
+        let ls = await YonghuSql.findAndCountLike(body.zhanghao);
 
         return {
             yonghu: ls[0].map(value =>

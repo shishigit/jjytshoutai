@@ -1,4 +1,5 @@
 import {Yonghu} from './yonghu';
+import {Like} from "typeorm";
 
 export class YonghuSql
 {
@@ -7,9 +8,9 @@ export class YonghuSql
         return Yonghu.findOne({where: {zhanghao}});
     }
 
-    static findAndCount()
+    static findAndCountLike(zhanghao: string)
     {
-        return Yonghu.findAndCount()
+        return Yonghu.findAndCount({where: {zhanghao: Like(`%${zhanghao}%`)}})
     }
 
     static findById(id: number)

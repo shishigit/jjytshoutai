@@ -33,7 +33,7 @@ export namespace yonghu
 
     export interface chaxunReq
     {
-
+        zhanghao: string
     }
 
     export interface jihuoRes
