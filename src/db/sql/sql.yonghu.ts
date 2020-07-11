@@ -22,4 +22,22 @@ export class SqlYonghu
     {
         return Yonghu.delete({id: id})
     }
+
+    static shanchujuese(yonghuid: number, jueseid: number)
+    {
+        return Yonghu.query(`
+                    delete
+                    from yonghu_juese
+                    where jueseId = ?
+                      and yonghuId = ?`,
+            [jueseid, yonghuid])
+    }
+
+    static tianjiajuese(yonghuid: number, jueseid: number)
+    {
+        return Yonghu.query(`
+                    insert into yonghu_juese(yonghuId, jueseId) value (?, ?)
+            `,
+            [yonghuid, jueseid])
+    }
 }

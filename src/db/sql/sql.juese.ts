@@ -24,4 +24,9 @@ export class SqlJuese
     {
         return Juese.find()
     }
+
+    static async findById(id: number)
+    {
+        return Juese.findOne({where: {id: id}})
+    }
 }
