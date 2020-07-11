@@ -10,6 +10,8 @@ import jihuoRes = yonghu.jihuoRes;
 import jihuoReq = yonghu.jihuoReq;
 import chaxunReq = yonghu.chaxunReq;
 import tianjiaReq = yonghu.tianjiaReq;
+import shangchuReq = yonghu.shangchuReq;
+import shangchuRes = yonghu.shangchuRes;
 
 
 @JJYController('yonghu', '用户管理接口')
@@ -46,6 +48,18 @@ export class CtrlYonghuguanli
         if (!yonghu) throw new YichangTishi('没有找到该用户！')
         yonghu.jihuo = body.jihuo;
         await yonghu.save()
+        return {}
+    }
+
+    @JJYPost('shanchu', '删除用户')
+    async shanchu(
+        @JJYBody() body: shangchuReq,
+    ): Promise<shangchuRes>
+    {
+        if (!body.id) throw new YichangTishi('没有选取操作的用户！');
+        let yonghu = await YonghuSql.findById(body.id);
+        if (!yonghu) throw new YichangTishi('没有找到该用户！')
+        await YonghuSql.deleteById(body.id)
         return {}
     }
 

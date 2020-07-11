@@ -16,4 +16,9 @@ export class YonghuSql
     {
         return Yonghu.findOne({id})
     }
+
+    static async deleteById(id: number)
+    {
+        return Yonghu.delete({id: id})
+    }
 }
