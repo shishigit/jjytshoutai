@@ -19,4 +19,9 @@ export class JueseSql
         )
     `, [yonghuid]);
     }
+
+    static findAll()
+    {
+        return Juese.find()
+    }
 }

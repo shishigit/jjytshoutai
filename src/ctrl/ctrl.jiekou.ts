@@ -1,11 +1,11 @@
 export namespace yonghu
 {
-    export interface shangchuReq
+    export interface shanchuReq
     {
         id: number
     }
 
-    export interface shangchuRes
+    export interface shanchuRes
     {
     }
 
@@ -44,6 +44,20 @@ export namespace yonghu
     {
         id: number,
         jihuo: boolean,
+    }
+
+    export interface chaxunjueseReq
+    {
+        // 用户ID
+        id: number
+    }
+
+    export interface chaxunjueseRes
+    {
+        id: number;
+        mingcheng: string;
+        shuoming: string;
+        yongyou: boolean
     }
 }
 

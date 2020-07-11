@@ -1,5 +1,6 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/common';
-import { Response } from 'express';
+import {ArgumentsHost, Catch, ExceptionFilter, HttpException} from '@nestjs/common';
+import {Request, Response} from 'express';
+import {rizhi} from "./rizhi";
 
 /**
  * HTTP 异常处理器
@@ -7,20 +8,24 @@ import { Response } from 'express';
 @Catch(HttpException)
 export class HttpYichang implements ExceptionFilter
 {
-  catch(exception: HttpException, host: ArgumentsHost)
-  {
-    const ctx = host.switchToHttp();
-    const response = ctx.getResponse<Response>();
-    const status = exception.getStatus();
-
-    if (status === 600)
+    catch(exception: HttpException, host: ArgumentsHost)
     {
-      response.status(status).json(exception.getResponse());
-      return;
-    }
+        const ctx = host.switchToHttp();
+        const response = ctx.getResponse<Response>();
+        const request = ctx.getRequest<Request>();
+        const status = exception.getStatus();
 
-    response.status(600).json('系统异常！');
-  }
+        if (status === 600)
+        {
+            response.status(status).json(exception.getResponse());
+            return;
+        }
+
+        rizhi.error(`请求异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
+        rizhi.error(exception)
+
+        response.status(600).json('系统异常！');
+    }
 }
 
 /**
@@ -28,10 +33,10 @@ export class HttpYichang implements ExceptionFilter
  */
 export class YichangTishi extends HttpException
 {
-  constructor(private readonly xinxi: string)
-  {
-    super(xinxi, 600);
-  }
+    constructor(private readonly xinxi: string)
+    {
+        super(xinxi, 600);
+    }
 }
 
 /**
@@ -39,8 +44,8 @@ export class YichangTishi extends HttpException
  */
 export class YichangXitongTuichu extends Error
 {
-  constructor(message: string)
-  {
-    super(message);
-  }
+    constructor(message: string)
+    {
+        super(message);
+    }
 }

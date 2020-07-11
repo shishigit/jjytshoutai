@@ -4,14 +4,17 @@ import {YonghuSql} from '../db/yonghu.sql';
 import {Yonghu} from '../db/yonghu';
 import {jiami, stringUtil} from "../config/gongju";
 import {yonghu} from "./ctrl.jiekou";
+import {JueseSql} from "../db/juese.sql";
 import tianjiaRes = yonghu.tianjiaRes;
 import chaxunRes = yonghu.chaxunRes;
 import jihuoRes = yonghu.jihuoRes;
 import jihuoReq = yonghu.jihuoReq;
 import chaxunReq = yonghu.chaxunReq;
 import tianjiaReq = yonghu.tianjiaReq;
-import shangchuReq = yonghu.shangchuReq;
-import shangchuRes = yonghu.shangchuRes;
+import shanchuReq = yonghu.shanchuReq;
+import shanchuRes = yonghu.shanchuRes;
+import chaxunjueseReq = yonghu.chaxunjueseReq;
+import chaxunjueseRes = yonghu.chaxunjueseRes;
 
 
 @JJYController('yonghu', '用户管理接口')
@@ -53,8 +56,8 @@ export class CtrlYonghuguanli
 
     @JJYPost('shanchu', '删除用户')
     async shanchu(
-        @JJYBody() body: shangchuReq,
-    ): Promise<shangchuRes>
+        @JJYBody() body: shanchuReq,
+    ): Promise<shanchuRes>
     {
         if (!body.id) throw new YichangTishi('没有选取操作的用户！');
         let yonghu = await YonghuSql.findById(body.id);
@@ -81,4 +84,29 @@ export class CtrlYonghuguanli
         await yonghu.save();
         return {}
     }
+
+    @JJYPost('yonghujuese', '查询用户角色')
+    async yonghujuese(
+        @JJYBody() body: chaxunjueseReq,
+    ): Promise<chaxunjueseRes[]>
+    {
+        if (!body.id) throw new YichangTishi('没有指定用户')
+        let yonghu = await YonghuSql.findById(body.id)
+        if (!yonghu) throw new YichangTishi('没有找到用户')
+        let yongyoujueses = await JueseSql.findByYonghuId(yonghu.id)
+        let yongyoujueseids = yongyoujueses.map(value => value.id)
+
+        let suoyoujuese = await JueseSql.findAll()
+
+        return suoyoujuese.map(value =>
+        {
+            return {
+                id: value.id,
+                mingcheng: value.mingcheng,
+                shuoming: value.shuoming,
+                yongyou: yongyoujueseids.includes(value.id)
+            }
+        })
+    }
+
 }
