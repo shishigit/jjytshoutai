@@ -1,5 +1,5 @@
 import {Jiekou} from './jiekou';
-import {JianQuanLeixing} from '../config/changliang';
+import {JianquanLeixing} from '../config/changliang';
 import {FindConditions} from "typeorm";
 import {QueryDeepPartialEntity} from "typeorm/query-builder/QueryPartialEntity";
 
@@ -37,7 +37,7 @@ export class JiekouSql
         return Jiekou.find({where: {qiyong}});
     }
 
-    static async findByJianQuan(jianquan: JianQuanLeixing)
+    static async findByJianQuan(jianquan: JianquanLeixing)
     {
         return Jiekou.find({where: {qiyong: true, jianquan}});
     }

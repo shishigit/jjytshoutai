@@ -1,6 +1,6 @@
 import {BaseEntity, Column, Entity, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {RequestMethod} from '@nestjs/common';
-import {JianQuanLeixing} from '../config/changliang';
+import {JianquanLeixing} from '../config/changliang';
 import {Juese} from './juese';
 
 /**
@@ -34,7 +34,7 @@ export class Jiekou extends BaseEntity
 
     // 鉴权类型
     @Column({nullable: false})
-    jianquan: JianQuanLeixing;
+    jianquan: JianquanLeixing;
 
     @ManyToMany(type => Juese, juese => juese.jiekous)
     jueses: Juese[];
@@ -45,7 +45,7 @@ export class Jiekou extends BaseEntity
         fenzu: string,
         shuoming: string,
         qiyong: boolean,
-        jianquan: JianQuanLeixing)
+        jianquan: JianquanLeixing)
     {
         super();
 

@@ -2,7 +2,7 @@ import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod} from '@n
 import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
 import {Jiekou} from '../db/jiekou';
 import {JiekouSql} from '../db/jiekou.sql';
-import {JianQuanLeixing} from './changliang';
+import {JianquanLeixing} from './changliang';
 import {JueseSql} from '../db/juese.sql';
 import {YichangXitongTuichu} from './yichang';
 import {Type} from '@nestjs/common/interfaces';
@@ -75,7 +75,7 @@ export function JJYController(prefixOrOptions: string, fenzu: string): ClassDeco
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing = 'jianquan'): MethodDecorator
+export function JJYPost(path: string, path_shuoming: string, path_jianquan: JianquanLeixing = 'jianquan'): MethodDecorator
 {
     return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
@@ -87,7 +87,7 @@ export function JJYPost(path: string, path_shuoming: string, path_jianquan: Jian
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function JJYGet(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
+export function JJYGet(path: string, path_shuoming: string, path_jianquan: JianquanLeixing): MethodDecorator
 {
     return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
@@ -99,7 +99,7 @@ export function JJYGet(path: string, path_shuoming: string, path_jianquan: JianQ
 }
 
 // noinspection JSUnusedGlobalSymbols
-export function JJYAll(path: string, path_shuoming: string, path_jianquan: JianQuanLeixing): MethodDecorator
+export function JJYAll(path: string, path_shuoming: string, path_jianquan: JianquanLeixing): MethodDecorator
 {
     return function (target: Object, key: string | symbol, descriptor: TypedPropertyDescriptor<any>)
     {
