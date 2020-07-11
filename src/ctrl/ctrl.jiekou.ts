@@ -59,6 +59,17 @@ export namespace yonghu
         shuoming: string;
         yongyou: boolean
     }
+
+    export interface xiugaijueseReq
+    {
+        jueseid: number;
+        yonghuid: number;
+        yongyou: boolean
+    }
+
+    export interface xiugaijueseRes
+    {
+    }
 }
 
 export namespace xitong

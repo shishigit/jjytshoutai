@@ -1,15 +1,15 @@
 import {Banben} from '../db/banben';
 import {Yonghu} from '../db/yonghu';
 import {EntityManager, Transaction, TransactionManager} from 'typeorm';
-import {YonghuSql} from '../db/yonghu.sql';
-import {JueseSql} from '../db/juese.sql';
+import {SqlYonghu} from '../db/sql/sql.yonghu';
+import {SqlJuese} from '../db/sql/sql.juese';
 import {Juese} from '../db/juese';
 import {YichangXitongTuichu} from './yichang';
 import {jiami} from "./gongju";
 
 async function v001(manager: EntityManager)
 {
-    let ls = await YonghuSql.findByZhanghao('admin');
+    let ls = await SqlYonghu.findByZhanghao('admin');
     if (!ls)
     {
         let yonghu = new Yonghu();
@@ -21,7 +21,7 @@ async function v001(manager: EntityManager)
 
 async function v002(manager: EntityManager)
 {
-    let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
+    let chaojiguanliyuan = await SqlJuese.findByMingcheng('超级管理员');
     if (!chaojiguanliyuan)
     {
         let chaojiguanliyuan = new Juese();
@@ -33,14 +33,14 @@ async function v002(manager: EntityManager)
 
 async function v003(manager: EntityManager)
 {
-    let admin = await YonghuSql.findByZhanghao('admin');
+    let admin = await SqlYonghu.findByZhanghao('admin');
     if (!admin) throw new YichangXitongTuichu('admin 账号不存在');
 
 
-    let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
+    let chaojiguanliyuan = await SqlJuese.findByMingcheng('超级管理员');
     if (!chaojiguanliyuan) throw new YichangXitongTuichu('超级管理员角色不存在');
 
-    let jueses = await JueseSql.findByYonghuId(admin.id);
+    let jueses = await SqlJuese.findByYonghuId(admin.id);
     let yiguanlian = jueses.map(value => value.id).includes(chaojiguanliyuan.id);
     if (!yiguanlian)
     {

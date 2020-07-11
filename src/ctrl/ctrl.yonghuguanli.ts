@@ -1,10 +1,10 @@
 import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {YichangTishi} from '../config/yichang';
-import {YonghuSql} from '../db/yonghu.sql';
+import {SqlYonghu} from '../db/sql/sql.yonghu';
 import {Yonghu} from '../db/yonghu';
 import {jiami, stringUtil} from "../config/gongju";
 import {yonghu} from "./ctrl.jiekou";
-import {JueseSql} from "../db/juese.sql";
+import {SqlJuese} from "../db/sql/sql.juese";
 import tianjiaRes = yonghu.tianjiaRes;
 import chaxunRes = yonghu.chaxunRes;
 import jihuoRes = yonghu.jihuoRes;
@@ -25,7 +25,7 @@ export class CtrlYonghuguanli
         @JJYBody() body: chaxunReq,
     ): Promise<chaxunRes>
     {
-        let ls = await YonghuSql.findAndCountLike(body.zhanghao);
+        let ls = await SqlYonghu.findAndCountLike(body.zhanghao);
 
         return {
             yonghu: ls[0].map(value =>
@@ -40,6 +40,30 @@ export class CtrlYonghuguanli
         }
     }
 
+    @JJYPost('chaxunjuese', '查询用户角色')
+    async chaxunjuese(
+        @JJYBody() body: chaxunjueseReq,
+    ): Promise<chaxunjueseRes[]>
+    {
+        if (!body.id) throw new YichangTishi('没有指定用户')
+        let yonghu = await SqlYonghu.findById(body.id)
+        if (!yonghu) throw new YichangTishi('没有找到用户')
+        let yongyoujueses = await SqlJuese.findByYonghuId(yonghu.id)
+        let yongyoujueseids = yongyoujueses.map(value => value.id)
+
+        let suoyoujuese = await SqlJuese.findAll()
+
+        return suoyoujuese.map(value =>
+        {
+            return {
+                id: value.id,
+                mingcheng: value.mingcheng,
+                shuoming: value.shuoming,
+                yongyou: yongyoujueseids.includes(value.id)
+            }
+        })
+    }
+
     @JJYPost('jihuo', '激活用户')
     async jihuo(
         @JJYBody() body: jihuoReq,
@@ -47,7 +71,7 @@ export class CtrlYonghuguanli
     {
         if (!body.id) throw new YichangTishi('没有选取操作的用户！');
         if (body.jihuo === undefined) throw new YichangTishi('没有指明是否激活！');
-        let yonghu = await YonghuSql.findById(body.id);
+        let yonghu = await SqlYonghu.findById(body.id);
         if (!yonghu) throw new YichangTishi('没有找到该用户！')
         yonghu.jihuo = body.jihuo;
         await yonghu.save()
@@ -60,9 +84,9 @@ export class CtrlYonghuguanli
     ): Promise<shanchuRes>
     {
         if (!body.id) throw new YichangTishi('没有选取操作的用户！');
-        let yonghu = await YonghuSql.findById(body.id);
+        let yonghu = await SqlYonghu.findById(body.id);
         if (!yonghu) throw new YichangTishi('没有找到该用户！')
-        await YonghuSql.deleteById(body.id)
+        await SqlYonghu.deleteById(body.id)
         return {}
     }
 
@@ -74,7 +98,7 @@ export class CtrlYonghuguanli
         if (!body.zhanghao || !stringUtil.isZhimuShuzi(body.zhanghao))
             throw new YichangTishi('账号应为字母、数字组合！');
 
-        let yicunzai = await YonghuSql.findByZhanghao(body.zhanghao);
+        let yicunzai = await SqlYonghu.findByZhanghao(body.zhanghao);
         if (yicunzai) throw new YichangTishi('账号已经存在');
 
         let yonghu = new Yonghu();
@@ -85,28 +109,18 @@ export class CtrlYonghuguanli
         return {}
     }
 
-    @JJYPost('yonghujuese', '查询用户角色')
-    async yonghujuese(
-        @JJYBody() body: chaxunjueseReq,
-    ): Promise<chaxunjueseRes[]>
-    {
-        if (!body.id) throw new YichangTishi('没有指定用户')
-        let yonghu = await YonghuSql.findById(body.id)
-        if (!yonghu) throw new YichangTishi('没有找到用户')
-        let yongyoujueses = await JueseSql.findByYonghuId(yonghu.id)
-        let yongyoujueseids = yongyoujueses.map(value => value.id)
-
-        let suoyoujuese = await JueseSql.findAll()
-
-        return suoyoujuese.map(value =>
-        {
-            return {
-                id: value.id,
-                mingcheng: value.mingcheng,
-                shuoming: value.shuoming,
-                yongyou: yongyoujueseids.includes(value.id)
-            }
-        })
-    }
+    // @JJYPost('xiugaijuese', '修改用户角色')
+    // async xiugaijuese(
+    //     @JJYBody() body: xiugaijueseReq,
+    // ): Promise<xiugaijueseRes>
+    // {
+    //     if (!body.jueseid) throw new YichangTishi('没有指定角色')
+    //     if (!body.yonghuid) throw new YichangTishi('没有指定用户')
+    //     if (body.yongyou === undefined) throw new YichangTishi('没有指定是否用偶角色')
+    //
+    //     let yonghu = await SqlYonghu.findById(body.yonghuid)
+    //     let yonghu = await SqlJuese.findByYonghuId(body.yonghuid)
+    //
+    // }
 
 }

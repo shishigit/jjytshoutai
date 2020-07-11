@@ -1,9 +1,9 @@
-import {Jiekou} from './jiekou';
+import {Jiekou} from '../jiekou';
 import {FindConditions} from "typeorm";
 import {QueryDeepPartialEntity} from "typeorm/query-builder/QueryPartialEntity";
-import {JianquanLeixing} from "../config/gongju";
+import {JianquanLeixing} from "../../config/gongju";
 
-export class JiekouSql
+export class SqlJiekou
 {
     static async existByUrl(url: string | Jiekou): Promise<boolean>
     {
@@ -14,7 +14,7 @@ export class JiekouSql
 
     static updateByUrl(jiekou: Jiekou)
     {
-        return JiekouSql.update({url: jiekou.url}, jiekou);
+        return SqlJiekou.update({url: jiekou.url}, jiekou);
     }
 
     static findByJueseids(juesesid: number[]): Promise<Jiekou[]>

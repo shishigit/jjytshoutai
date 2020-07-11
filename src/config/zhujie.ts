@@ -1,8 +1,8 @@
 import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod} from '@nestjs/common';
 import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
 import {Jiekou} from '../db/jiekou';
-import {JiekouSql} from '../db/jiekou.sql';
-import {JueseSql} from '../db/juese.sql';
+import {SqlJiekou} from '../db/sql/sql.jiekou';
+import {SqlJuese} from '../db/sql/sql.juese';
 import {YichangXitongTuichu} from './yichang';
 import {Type} from '@nestjs/common/interfaces';
 import {JianquanLeixing} from "./gongju";
@@ -20,19 +20,19 @@ const suoyouJiekou: Jiekou[] = [];
  */
 export async function gengxinJiekou()
 {
-    await JiekouSql.update({qiyong: false}, {qiyong: false});
+    await SqlJiekou.update({qiyong: false}, {qiyong: false});
 
     for (const jiekou of suoyouJiekou)
     {
-        if (await JiekouSql.existByUrl(jiekou.url))
-            await JiekouSql.updateByUrl(jiekou);
+        if (await SqlJiekou.existByUrl(jiekou.url))
+            await SqlJiekou.updateByUrl(jiekou);
         else
             await jiekou.save();
     }
 
     // 更新超级管理员接口
-    let qiyongjiekou = await JiekouSql.findByQiyong(true);
-    let chaojiguanliyuan = await JueseSql.findByMingcheng('超级管理员');
+    let qiyongjiekou = await SqlJiekou.findByQiyong(true);
+    let chaojiguanliyuan = await SqlJuese.findByMingcheng('超级管理员');
     if (!chaojiguanliyuan) throw new YichangXitongTuichu('超级管理员角色不存在');
 
     chaojiguanliyuan.jiekous = qiyongjiekou.filter(value => value.jianquan === 'jianquan');

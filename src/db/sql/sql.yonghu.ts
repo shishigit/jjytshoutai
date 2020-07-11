@@ -1,7 +1,7 @@
-import {Yonghu} from './yonghu';
+import {Yonghu} from '../yonghu';
 import {Like} from "typeorm";
 
-export class YonghuSql
+export class SqlYonghu
 {
     static findByZhanghao(zhanghao: string): Promise<Yonghu>
     {

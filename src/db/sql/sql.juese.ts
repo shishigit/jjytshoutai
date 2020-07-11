@@ -1,6 +1,6 @@
-import {Juese} from './juese';
+import {Juese} from '../juese';
 
-export class JueseSql
+export class SqlJuese
 {
     static findByMingcheng(mingcheng: string): Promise<Juese>
     {
