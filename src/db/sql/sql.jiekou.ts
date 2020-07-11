@@ -46,4 +46,9 @@ export class SqlJiekou
     {
         return Jiekou.update<Jiekou>(find, update)
     }
+
+    static async deleteFeiqi()
+    {
+        return Jiekou.delete({qiyong: false})
+    }
 }

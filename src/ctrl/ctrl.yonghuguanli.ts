@@ -125,5 +125,4 @@ export class CtrlYonghuguanli
         else await SqlYonghu.shanchujuese(body.yonghuid, body.jueseid)
         return {}
     }
-
 }

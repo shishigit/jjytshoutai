@@ -20,7 +20,7 @@ const suoyouJiekou: Jiekou[] = [];
  */
 export async function gengxinJiekou()
 {
-    await SqlJiekou.update({qiyong: false}, {qiyong: false});
+    await SqlJiekou.update({qiyong: true}, {qiyong: false});
 
     for (const jiekou of suoyouJiekou)
     {
@@ -37,6 +37,8 @@ export async function gengxinJiekou()
 
     chaojiguanliyuan.jiekous = qiyongjiekou.filter(value => value.jianquan === 'jianquan');
     await chaojiguanliyuan.save();
+
+    await SqlJiekou.deleteFeiqi()
 }
 
 /**
