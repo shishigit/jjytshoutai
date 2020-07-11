@@ -6,14 +6,11 @@ import {JJYSession} from '../config/redis.session';
 import {Yonghu} from '../db/yonghu';
 import {JiekouSql} from '../db/jiekou.sql';
 import {JueseSql} from '../db/juese.sql';
-import {ApiProperty} from '@nestjs/swagger';
 import {jiami} from "../config/gongju";
 
 class CanshuXitongDenglu
 {
-  @ApiProperty({required: true})
   zhanghao: string;
-  @ApiProperty()
   mima: string;
 }
 
