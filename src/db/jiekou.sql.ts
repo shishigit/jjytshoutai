@@ -1,7 +1,7 @@
 import {Jiekou} from './jiekou';
-import {JianquanLeixing} from '../config/changliang';
 import {FindConditions} from "typeorm";
 import {QueryDeepPartialEntity} from "typeorm/query-builder/QueryPartialEntity";
+import {JianquanLeixing} from "../config/gongju";
 
 export class JiekouSql
 {

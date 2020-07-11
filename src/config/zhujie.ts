@@ -2,11 +2,11 @@ import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod} from '@n
 import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
 import {Jiekou} from '../db/jiekou';
 import {JiekouSql} from '../db/jiekou.sql';
-import {JianquanLeixing} from './changliang';
 import {JueseSql} from '../db/juese.sql';
 import {YichangXitongTuichu} from './yichang';
 import {Type} from '@nestjs/common/interfaces';
 import {ApiTags} from '@nestjs/swagger';
+import {JianquanLeixing} from "./gongju";
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';

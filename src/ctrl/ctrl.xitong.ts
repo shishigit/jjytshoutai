@@ -1,17 +1,17 @@
-import { Session } from '@nestjs/common';
-import { YichangTishi } from '../config/yichang';
-import { Jiami } from '../config/jiami';
-import { JJYBody, JJYController, JJYPost } from '../config/zhujie';
-import { YonghuSql } from '../db/yonghu.sql';
-import { JJYSession } from '../config/redis.session';
-import { Yonghu } from '../db/yonghu';
-import { JiekouSql } from '../db/jiekou.sql';
-import { JueseSql } from '../db/juese.sql';
-import { ApiProperty } from '@nestjs/swagger';
+import {Session} from '@nestjs/common';
+import {YichangTishi} from '../config/yichang';
+import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
+import {YonghuSql} from '../db/yonghu.sql';
+import {JJYSession} from '../config/redis.session';
+import {Yonghu} from '../db/yonghu';
+import {JiekouSql} from '../db/jiekou.sql';
+import {JueseSql} from '../db/juese.sql';
+import {ApiProperty} from '@nestjs/swagger';
+import {jiami} from "../config/gongju";
 
 class CanshuXitongDenglu
 {
-  @ApiProperty({ required: true })
+  @ApiProperty({required: true})
   zhanghao: string;
   @ApiProperty()
   mima: string;
@@ -30,7 +30,7 @@ export class CtrlXitong
     if (!canshu.mima) throw  new YichangTishi('密码不能为空');
     let yonghu: Yonghu = await YonghuSql.findByZhanghao(canshu.zhanghao);
     if (!yonghu || !yonghu.jihuo) throw new YichangTishi('账号或者密码错误！');
-    let fuhe = Jiami.fuhe(canshu.mima, yonghu.mima);
+    let fuhe = jiami.fuhe(canshu.mima, yonghu.mima);
     if (!fuhe) throw new YichangTishi('账号或者密码错误！');
 
     session.yonghu = { id: yonghu.id, zhanghao: yonghu.zhanghao };

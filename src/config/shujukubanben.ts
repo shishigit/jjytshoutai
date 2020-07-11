@@ -1,11 +1,11 @@
-import { Banben } from '../db/banben';
-import { Yonghu } from '../db/yonghu';
-import { EntityManager, Transaction, TransactionManager } from 'typeorm';
-import { Jiami } from './jiami';
-import { YonghuSql } from '../db/yonghu.sql';
-import { JueseSql } from '../db/juese.sql';
-import { Juese } from '../db/juese';
-import { YichangXitongTuichu } from './yichang';
+import {Banben} from '../db/banben';
+import {Yonghu} from '../db/yonghu';
+import {EntityManager, Transaction, TransactionManager} from 'typeorm';
+import {YonghuSql} from '../db/yonghu.sql';
+import {JueseSql} from '../db/juese.sql';
+import {Juese} from '../db/juese';
+import {YichangXitongTuichu} from './yichang';
+import {jiami} from "./gongju";
 
 async function v001(manager: EntityManager)
 {
@@ -14,7 +14,7 @@ async function v001(manager: EntityManager)
   {
     let yonghu = new Yonghu();
     yonghu.zhanghao = 'admin';
-    yonghu.mima = Jiami.jiami('mima');
+    yonghu.mima = jiami.jiami('mima');
     await manager.save(yonghu);
   }
 }

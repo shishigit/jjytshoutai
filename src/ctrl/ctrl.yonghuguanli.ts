@@ -2,8 +2,7 @@ import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {YichangTishi} from '../config/yichang';
 import {YonghuSql} from '../db/yonghu.sql';
 import {Yonghu} from '../db/yonghu';
-import {Jiami} from '../config/jiami';
-import {StringUtil} from "../config/gongju";
+import {jiami, stringUtil} from "../config/gongju";
 
 @JJYController('yonghu', '用户管理接口')
 export class CtrlYonghuguanli
@@ -13,7 +12,7 @@ export class CtrlYonghuguanli
         @JJYBody('zhanghao') zhanghao: string,
     )
     {
-        if (!zhanghao || !StringUtil.isZhimuShuzi(zhanghao))
+        if (!zhanghao || !stringUtil.isZhimuShuzi(zhanghao))
             throw new YichangTishi('账号应为字母、数字组合！');
 
         let yicunzai = await YonghuSql.findByZhanghao(zhanghao);
@@ -22,7 +21,7 @@ export class CtrlYonghuguanli
         let yonghu = new Yonghu();
         yonghu.zhanghao = zhanghao;
         yonghu.jihuo = true;
-        yonghu.mima = Jiami.jiami('123456');
+        yonghu.mima = jiami.jiami('123456');
         await yonghu.save();
     }
 
