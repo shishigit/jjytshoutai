@@ -1,5 +1,5 @@
 import {JJYBody, JJYController, JJYPost} from "../config/zhujie";
-import {juese} from "./ctrl.jiekou";
+import {http_juese} from "./ctrl.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
 
 @JJYController('juese', '角色管理接口')
@@ -7,8 +7,8 @@ export class CtrlJueseguanli
 {
     @JJYPost('chaxun', '查询角色')
     async chaxun(
-        @JJYBody() body: juese.chaxunReq,
-    ): Promise<juese.chaxunRes>
+        @JJYBody() body: http_juese.chaxunReq,
+    ): Promise<http_juese.chaxunRes>
     {
         let ls = await SqlJuese.findAllAndCount()
         return {

@@ -3,20 +3,20 @@ import {YichangTishi} from '../config/yichang';
 import {SqlYonghu} from '../db/sql/sql.yonghu';
 import {Yonghu} from '../db/yonghu';
 import {jiami, stringUtil} from "../config/gongju";
-import {yonghu} from "./ctrl.jiekou";
+import {http_yonghu} from "./ctrl.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
-import tianjiaRes = yonghu.tianjiaRes;
-import chaxunRes = yonghu.chaxunRes;
-import jihuoRes = yonghu.jihuoRes;
-import jihuoReq = yonghu.jihuoReq;
-import chaxunReq = yonghu.chaxunReq;
-import tianjiaReq = yonghu.tianjiaReq;
-import shanchuReq = yonghu.shanchuReq;
-import shanchuRes = yonghu.shanchuRes;
-import chaxunjueseReq = yonghu.chaxunjueseReq;
-import chaxunjueseRes = yonghu.chaxunjueseRes;
-import xiugaijueseReq = yonghu.xiugaijueseReq;
-import xiugaijueseRes = yonghu.xiugaijueseRes;
+import tianjiaRes = http_yonghu.tianjiaRes;
+import chaxunRes = http_yonghu.chaxunRes;
+import jihuoRes = http_yonghu.jihuoRes;
+import jihuoReq = http_yonghu.jihuoReq;
+import chaxunReq = http_yonghu.chaxunReq;
+import tianjiaReq = http_yonghu.tianjiaReq;
+import shanchuReq = http_yonghu.shanchuReq;
+import shanchuRes = http_yonghu.shanchuRes;
+import chaxunjueseReq = http_yonghu.chaxunjueseReq;
+import chaxunjueseRes = http_yonghu.chaxunjueseRes;
+import xiugaijueseReq = http_yonghu.xiugaijueseReq;
+import xiugaijueseRes = http_yonghu.xiugaijueseRes;
 
 const meiyouyonghuyichang = new YichangTishi('没有找到用户！')
 

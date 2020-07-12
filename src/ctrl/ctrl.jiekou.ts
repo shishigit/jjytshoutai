@@ -1,4 +1,4 @@
-export namespace yonghu
+export namespace http_yonghu
 {
     export interface shanchuReq
     {
@@ -72,7 +72,7 @@ export namespace yonghu
     }
 }
 
-export namespace xitong
+export namespace http_xitong
 {
     export interface dengluRes
     {
@@ -100,7 +100,7 @@ export namespace xitong
 
 }
 
-export namespace juese
+export namespace http_juese
 {
     export interface chaxunReq
     {

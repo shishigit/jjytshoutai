@@ -7,9 +7,9 @@ import {Yonghu} from '../db/yonghu';
 import {SqlJiekou} from '../db/sql/sql.jiekou';
 import {SqlJuese} from '../db/sql/sql.juese';
 import {jiami} from "../config/gongju";
-import {xitong} from "./ctrl.jiekou";
-import denglu = xitong.dengluRes;
-import dengluReq = xitong.dengluReq;
+import {http_xitong} from "./ctrl.jiekou";
+import denglu = http_xitong.dengluRes;
+import dengluReq = http_xitong.dengluReq;
 
 @JJYController('xitong', '系统接口')
 export class CtrlXitong
