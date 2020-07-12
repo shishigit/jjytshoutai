@@ -1,8 +1,6 @@
 import {TypeOrmModuleOptions} from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
-import {Yonghu} from '../db/entities/yonghu';
-import {Banben} from '../db/entities/banben';
-import {Jiekou} from '../db/entities/jiekou';
-import {Juese} from '../db/entities/juese';
+
+import {resolve} from "path";
 
 /**
  * 配置文件：整个系统的配置，用于配置开发环境和生产环境
@@ -30,8 +28,6 @@ interface Peizhiwenjian
     };
 }
 
-const entities = [Yonghu, Banben, Jiekou, Juese];
-
 // 开发环境
 const kaifahuanjing: Peizhiwenjian = {
     redis: {host: '127.0.0.1', port: 6379},
@@ -45,8 +41,10 @@ const kaifahuanjing: Peizhiwenjian = {
         username: 'root',
         password: 'shishi',
         database: 'jjytshoutai',
-        entities,
-        synchronize: true,
+        entities: [resolve(__dirname + '/../db/entities/*.js')],
+        migrations: [resolve(__dirname + '/../db/migrations/*.js')],
+        migrationsRun: true,
+        migrationsTransactionMode: 'all'
     },
 };
 
@@ -64,8 +62,10 @@ const shengchanhuanjing: Peizhiwenjian = {
         username: 'root',
         password: 'shishi',
         database: 'jjytshoutai',
-        entities,
-        synchronize: true,
+        entities: [resolve(__dirname + '/../db/entities/*.js')],
+        migrations: [resolve(__dirname + '/../db/migrations/*.js')],
+        migrationsRun: true,
+        migrationsTransactionMode: 'all'
     },
 };
 
