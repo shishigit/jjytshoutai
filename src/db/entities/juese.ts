@@ -1,4 +1,4 @@
-import {BaseEntity, BeforeInsert, Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, BeforeInsert, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Yonghu} from './yonghu';
 import {Jiekou} from './jiekou';
 import {YichangTishi} from "../../config/yichang";
@@ -21,8 +21,7 @@ export class Juese extends BaseEntity
     jihuo: boolean;
 
     // 名称
-    @Column({width: 50, nullable: false})
-    @Index('uk_juese_mingcheng', {unique: true})
+    @Column({width: 50, nullable: false, unique: true})
     mingcheng: string;
 
     // 说明

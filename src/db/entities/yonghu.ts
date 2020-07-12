@@ -1,4 +1,4 @@
-import {BaseEntity, Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Juese} from './juese';
 
 /**
@@ -11,8 +11,7 @@ export class Yonghu extends BaseEntity
     id: number;
 
     // 账号
-    @Column({width: 50, nullable: false})
-    @Index('uk_yonghuzhanghao', {unique: true})
+    @Column({width: 50, nullable: false, unique: true})
     zhanghao: string;
 
     // 密码
