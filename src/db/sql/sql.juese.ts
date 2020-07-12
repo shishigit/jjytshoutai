@@ -29,4 +29,9 @@ export class SqlJuese
     {
         return Juese.findOne({where: {id: id}})
     }
+
+    static findAllAndCount()
+    {
+        return Juese.findAndCount()
+    }
 }
