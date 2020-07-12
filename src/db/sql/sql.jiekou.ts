@@ -37,19 +37,24 @@ export class SqlJiekou
         return Jiekou.find({where: {qiyong}});
     }
 
+    static deleteFeiqi()
+    {
+        return Jiekou.delete({qiyong: false})
+    }
+
+    static findAll()
+    {
+        return Jiekou.find()
+    }
+
     // noinspection JSUnusedGlobalSymbols
-    static async findByJianQuan(jianquan: JianquanLeixing)
+    static findByJianQuan(jianquan: JianquanLeixing)
     {
         return Jiekou.find({where: {qiyong: true, jianquan}});
     }
 
-    static async update(find: FindConditions<Jiekou>, update: QueryDeepPartialEntity<Jiekou>)
+    static update(find: FindConditions<Jiekou>, update: QueryDeepPartialEntity<Jiekou>)
     {
         return Jiekou.update<Jiekou>(find, update)
-    }
-
-    static async deleteFeiqi()
-    {
-        return Jiekou.delete({qiyong: false})
     }
 }

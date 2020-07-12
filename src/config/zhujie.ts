@@ -37,8 +37,6 @@ export async function gengxinJiekou()
 
     chaojiguanliyuan.jiekous = qiyongjiekou.filter(value => value.jianquan === 'jianquan');
     await chaojiguanliyuan.save();
-
-    await SqlJiekou.deleteFeiqi()
 }
 
 /**

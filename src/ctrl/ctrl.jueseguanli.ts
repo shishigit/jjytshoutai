@@ -3,6 +3,7 @@ import {http_juese} from "./http.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
 import {YichangTishi} from "../config/yichang";
 import {Juese} from "../db/juese";
+import {SqlJiekou} from "../db/sql/sql.jiekou";
 
 @JJYController('juese', '角色管理接口')
 export class CtrlJueseguanli
@@ -42,6 +43,32 @@ export class CtrlJueseguanli
         return {}
     }
 
+    @JJYPost('chaxunjiekou', '查询角色的接口')
+    async chaxunjiekou(
+        @JJYBody() canshu: http_juese.chaxunjiekouReq,
+    ): Promise<http_juese.chaxunjiekouRes[]>
+    {
+        if (!canshu.id) throw new YichangTishi('没有指定角色')
+
+        let yiyoujueses = await SqlJiekou.findByJueseids([canshu.id])
+        let yiyoujieseids = yiyoujueses.map(value => value.id)
+
+        let suoyoujiekou = await SqlJiekou.findAll()
+
+
+        return suoyoujiekou
+            .filter(value => value.jianquan === 'jianquan')
+            .map(value =>
+            {
+                return {
+                    fenzu: value.fenzu,
+                    id: value.id,
+                    shuoming: value.shuoming,
+                    yongyou: yiyoujieseids.includes(value.id)
+                }
+            })
+    }
+
     @JJYPost('tianjia', '添加角色')
     async tianjia(
         @JJYBody() canshu: http_juese.tianjiaReq,
@@ -77,4 +104,20 @@ export class CtrlJueseguanli
         return {}
     }
 
+    @JJYPost('xiugaijiekou', '修改角色的接口')
+    async xiugaijiekou(
+        @JJYBody() canshu: http_juese.xiugaijiekouReq,
+    ): Promise<http_juese.xiugaijiekouRes>
+    {
+        if (!canshu.jueseid) throw new YichangTishi('没有指定角色')
+        if (!canshu.jiekouid) throw new YichangTishi('没有指定接口')
+        if (canshu.yongyou === undefined) throw new YichangTishi('没有指定是否激活')
+
+        if (canshu.yongyou)
+            await SqlJuese.tianjiajiekou(canshu.jueseid, canshu.jiekouid)
+        else
+            await SqlJuese.shanchujiekou(canshu.jueseid, canshu.jiekouid)
+
+        return {}
+    }
 }

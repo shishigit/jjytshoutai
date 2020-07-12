@@ -11,14 +11,14 @@ export class SqlJuese
     static findByYonghuId(yonghuid: number): Promise<Juese[]>
     {
         return Juese.query(`
-        select *
-        from juese
-        where id in (
-            select jueseId
-            from yonghu_juese
-            where yonghuId = ?
-        )
-    `, [yonghuid]);
+            select *
+            from juese
+            where id in (
+                select jueseId
+                from yonghu_juese
+                where yonghuId = ?
+            )
+        `, [yonghuid]);
     }
 
     static findAll()
@@ -34,5 +34,22 @@ export class SqlJuese
     static findAndCountLikeMingcheng(mingcheng: string)
     {
         return Juese.findAndCount({where: {mingcheng: Like(`%${mingcheng}%`)}})
+    }
+
+    static shanchujiekou(jueseid: number, jiekouid: number)
+    {
+        return Juese.query(`
+            delete
+            from juese_jiekou
+            where jueseId = ?
+              and jiekouId = ?
+        `, [jueseid, jiekouid])
+    }
+
+    static tianjiajiekou(jueseid: number, jiekouid: number)
+    {
+        return Juese.query(`
+            insert into juese_jiekou(jueseId, jiekouId) value (?, ?)
+        `, [jueseid, jiekouid])
     }
 }
