@@ -37,6 +37,7 @@ export class SqlJiekou
         return Jiekou.find({where: {qiyong}});
     }
 
+    // noinspection JSUnusedGlobalSymbols
     static deleteFeiqi()
     {
         return Jiekou.delete({qiyong: false})
