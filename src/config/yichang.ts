@@ -1,4 +1,4 @@
-import {ArgumentsHost, Catch, ExceptionFilter, HttpException} from '@nestjs/common';
+import {ArgumentsHost, Catch, ExceptionFilter, ForbiddenException, HttpException} from '@nestjs/common';
 import {Request, Response} from 'express';
 import {rizhi} from "./rizhi";
 import {QueryFailedError} from "typeorm";
@@ -14,15 +14,20 @@ export class HttpYichang implements ExceptionFilter
         const ctx = host.switchToHttp();
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
-        const status = exception.getStatus();
 
-        if (status === 600)
+        if (exception instanceof ForbiddenException)
         {
-            response.status(status).json(exception.getResponse());
+            response.status(600).json('暂无权限');
             return;
         }
 
-        rizhi.error(`请求异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
+        if (exception instanceof YichangTishi)
+        {
+            response.status(600).json(exception.getResponse());
+            return;
+        }
+
+        rizhi.error(`HTTP异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
         rizhi.error(exception)
 
         response.status(600).json('系统异常！');
@@ -47,7 +52,7 @@ export class ShujukuYichang implements ExceptionFilter
             return
         }
 
-        rizhi.error(`请求异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
+        rizhi.error(`SQL异常  URL：${request.originalUrl}  BODY：${JSON.stringify(request.body)}`);
         rizhi.error(exception)
 
         response.status(600).json('系统异常！');
