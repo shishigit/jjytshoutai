@@ -37,6 +37,7 @@ export class SqlJiekou
         return Jiekou.find({where: {qiyong}});
     }
 
+    // noinspection JSUnusedGlobalSymbols
     static async findByJianQuan(jianquan: JianquanLeixing)
     {
         return Jiekou.find({where: {qiyong: true, jianquan}});
