@@ -9,10 +9,11 @@ export class CtrlJueseguanli
 {
     @JJYPost('chaxun', '查询角色')
     async chaxun(
-        @JJYBody() body: http_juese.chaxunReq,
+        @JJYBody() canshu: http_juese.chaxunReq,
     ): Promise<http_juese.chaxunRes>
     {
-        let ls = await SqlJuese.findAllAndCount()
+        if (!canshu.mingcheng) canshu.mingcheng = ''
+        let ls = await SqlJuese.findAndCountLikeMingcheng(canshu.mingcheng)
         return {
             zongshu: ls[1],
             juese: ls[0].map(value =>

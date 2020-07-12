@@ -1,4 +1,5 @@
 import {Juese} from '../juese';
+import {Like} from "typeorm";
 
 export class SqlJuese
 {
@@ -30,8 +31,8 @@ export class SqlJuese
         return Juese.findOne({where: {id: id}})
     }
 
-    static findAllAndCount()
+    static findAndCountLikeMingcheng(mingcheng: string)
     {
-        return Juese.findAndCount()
+        return Juese.findAndCount({where: {mingcheng: Like(`%${mingcheng}%`)}})
     }
 }
