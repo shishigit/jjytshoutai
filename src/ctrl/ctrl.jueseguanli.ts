@@ -59,4 +59,22 @@ export class CtrlJueseguanli
         return {}
     }
 
+    @JJYPost('xiugai', '修改角色')
+    async xiugai(
+        @JJYBody() canshu: http_juese.xiugaiReq,
+    ): Promise<http_juese.xiugaiRes>
+    {
+        if (!canshu.id) throw new YichangTishi('没有指定要修改的角色')
+        if (!canshu.mingcheng) throw new YichangTishi('名称不能为空')
+        if (!canshu.shuoming) throw new YichangTishi('说明不能为空')
+
+
+        let juese = await SqlJuese.findById(canshu.id)
+        juese.shuoming = canshu.shuoming
+        juese.mingcheng = canshu.mingcheng
+
+        await juese.save()
+        return {}
+    }
+
 }

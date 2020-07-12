@@ -92,6 +92,18 @@ export namespace http_xitong
 
 export namespace http_juese
 {
+    export interface xiugaiReq
+    {
+        id: number
+        mingcheng: string
+        shuoming: string;
+    }
+
+    export interface xiugaiRes
+    {
+
+    }
+
     export interface chaxunReq
     {
         mingcheng: string
