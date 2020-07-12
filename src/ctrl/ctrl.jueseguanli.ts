@@ -2,7 +2,7 @@ import {JJYBody, JJYController, JJYPost} from "../config/zhujie";
 import {http_juese} from "./http.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
 import {YichangTishi} from "../config/yichang";
-import {Juese} from "../db/juese";
+import {Juese} from "../db/entities/juese";
 import {SqlJiekou} from "../db/sql/sql.jiekou";
 
 @JJYController('juese', '角色管理接口')

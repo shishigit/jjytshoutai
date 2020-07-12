@@ -1,4 +1,4 @@
-import {Jiekou} from '../jiekou';
+import {Jiekou} from '../entities/jiekou';
 import {FindConditions} from "typeorm";
 import {QueryDeepPartialEntity} from "typeorm/query-builder/QueryPartialEntity";
 import {JianquanLeixing} from "../../config/gongju";

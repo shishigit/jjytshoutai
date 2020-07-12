@@ -1,6 +1,6 @@
 import {All, Body, Controller, Get, PipeTransform, Post, RequestMethod} from '@nestjs/common';
 import {METHOD_METADATA, PATH_METADATA} from '@nestjs/common/constants';
-import {Jiekou} from '../db/jiekou';
+import {Jiekou} from '../db/entities/jiekou';
 import {SqlJiekou} from '../db/sql/sql.jiekou';
 import {SqlJuese} from '../db/sql/sql.juese';
 import {YichangXitongTuichu} from './yichang';

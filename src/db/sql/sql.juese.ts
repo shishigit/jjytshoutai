@@ -1,4 +1,4 @@
-import {Juese} from '../juese';
+import {Juese} from '../entities/juese';
 import {Like} from "typeorm";
 
 export class SqlJuese

@@ -1,8 +1,8 @@
 import {TypeOrmModuleOptions} from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
-import {Yonghu} from '../db/yonghu';
-import {Banben} from '../db/banben';
-import {Jiekou} from '../db/jiekou';
-import {Juese} from '../db/juese';
+import {Yonghu} from '../db/entities/yonghu';
+import {Banben} from '../db/entities/banben';
+import {Jiekou} from '../db/entities/jiekou';
+import {Juese} from '../db/entities/juese';
 
 /**
  * 配置文件：整个系统的配置，用于配置开发环境和生产环境

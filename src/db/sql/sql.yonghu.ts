@@ -1,4 +1,4 @@
-import {Yonghu} from '../yonghu';
+import {Yonghu} from '../entities/yonghu';
 import {Like} from "typeorm";
 
 export class SqlYonghu

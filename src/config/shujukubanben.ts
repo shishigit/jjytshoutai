@@ -1,9 +1,9 @@
-import {Banben} from '../db/banben';
-import {Yonghu} from '../db/yonghu';
+import {Banben} from '../db/entities/banben';
+import {Yonghu} from '../db/entities/yonghu';
 import {EntityManager, Transaction, TransactionManager} from 'typeorm';
 import {SqlYonghu} from '../db/sql/sql.yonghu';
 import {SqlJuese} from '../db/sql/sql.juese';
-import {Juese} from '../db/juese';
+import {Juese} from '../db/entities/juese';
 import {YichangXitongTuichu} from './yichang';
 import {jiami} from "./gongju";
 

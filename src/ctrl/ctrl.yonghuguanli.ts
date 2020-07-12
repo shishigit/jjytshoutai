@@ -1,7 +1,7 @@
 import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {YichangTishi} from '../config/yichang';
 import {SqlYonghu} from '../db/sql/sql.yonghu';
-import {Yonghu} from '../db/yonghu';
+import {Yonghu} from '../db/entities/yonghu';
 import {jiami, stringUtil} from "../config/gongju";
 import {http_yonghu} from "./http.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";

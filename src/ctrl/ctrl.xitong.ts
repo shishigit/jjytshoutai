@@ -3,7 +3,7 @@ import {YichangTishi} from '../config/yichang';
 import {JJYBody, JJYController, JJYPost} from '../config/zhujie';
 import {SqlYonghu} from '../db/sql/sql.yonghu';
 import {JJYSession} from '../config/redis.session';
-import {Yonghu} from '../db/yonghu';
+import {Yonghu} from '../db/entities/yonghu';
 import {SqlJiekou} from '../db/sql/sql.jiekou';
 import {SqlJuese} from '../db/sql/sql.juese';
 import {jiami} from "../config/gongju";

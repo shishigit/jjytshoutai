@@ -1,7 +1,7 @@
 import {BaseEntity, BeforeInsert, Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Yonghu} from './yonghu';
 import {Jiekou} from './jiekou';
-import {YichangTishi} from "../config/yichang";
+import {YichangTishi} from "../../config/yichang";
 
 /**
  * 角色
