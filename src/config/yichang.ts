@@ -41,7 +41,7 @@ export class ShujukuYichang implements ExceptionFilter
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
 
-        if (exception.message.includes('uk_juese_mingcheng'))
+        if (exception.message.includes('IDX_991590b5a68db044c3ba69b2e7'))
         {
             response.status(600).json('角色名称已经存在！');
             return
