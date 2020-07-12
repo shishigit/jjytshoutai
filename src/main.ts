@@ -3,7 +3,7 @@ import {AppModule} from './app.module';
 import {rizhi} from './config/rizhi';
 import {peizhiwenjian} from './config/peizhiwenjian';
 import {KaifaRizhi} from './config/qingqiurizhi';
-import {HttpYichang, YichangXitongTuichu} from './config/yichang';
+import {HttpYichang, ShujukuYichang, YichangXitongTuichu} from './config/yichang';
 import {gengxinJiekou} from './config/zhujie';
 import {HttpJianquan} from './config/http.jianquan';
 import {redissession} from './config/redis.session';
@@ -15,7 +15,7 @@ async function bootstrap()
 
     if (peizhiwenjian.kaifa) app.useGlobalInterceptors(new KaifaRizhi());
 
-    app.useGlobalFilters(new HttpYichang());
+    app.useGlobalFilters(new HttpYichang(), new ShujukuYichang());
     app.useGlobalGuards(new HttpJianquan());
     app.use(redissession);
 

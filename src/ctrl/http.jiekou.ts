@@ -117,4 +117,15 @@ export namespace http_juese
     export interface tianjiaRes
     {
     }
+
+    export interface jihuoReq
+    {
+        id: number
+        jihuo: boolean;
+    }
+
+    export interface jihuoRes
+    {
+
+    }
 }

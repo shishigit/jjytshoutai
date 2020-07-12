@@ -27,6 +27,20 @@ export class CtrlJueseguanli
         }
     }
 
+    @JJYPost('jihuo', '激活角色')
+    async jihuo(
+        @JJYBody() canshu: http_juese.jihuoReq,
+    ): Promise<http_juese.jihuoRes>
+    {
+        if (!canshu.id) throw new YichangTishi('没有指定角色')
+        if (canshu.jihuo === undefined) throw new YichangTishi('没有指定是否激活')
+        let juese = await SqlJuese.findById(canshu.id)
+        if (!juese) throw new YichangTishi('没有找到角色')
+        juese.jihuo = canshu.jihuo
+        await juese.save()
+        return {}
+    }
+
     @JJYPost('tianjia', '添加角色')
     async tianjia(
         @JJYBody() canshu: http_juese.tianjiaReq,
