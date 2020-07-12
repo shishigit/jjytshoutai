@@ -1,6 +1,8 @@
 import {JJYBody, JJYController, JJYPost} from "../config/zhujie";
 import {http_juese} from "./http.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
+import {YichangTishi} from "../config/yichang";
+import {Juese} from "../db/juese";
 
 @JJYController('juese', '角色管理接口')
 export class CtrlJueseguanli
@@ -23,6 +25,23 @@ export class CtrlJueseguanli
                 }
             })
         }
+    }
+
+    @JJYPost('tianjia', '添加角色')
+    async tianjia(
+        @JJYBody() canshu: http_juese.tianjiaReq,
+    ): Promise<http_juese.tianjiaRes>
+    {
+        if (!canshu.mingcheng) throw new YichangTishi('名称不能为空')
+        if (!canshu.shuoming) throw new YichangTishi('说明不能为空')
+
+        let juese = new Juese()
+        juese.jihuo = true
+        juese.shuoming = canshu.shuoming
+        juese.mingcheng = canshu.mingcheng
+
+        await juese.save()
+        return {}
     }
 
 }

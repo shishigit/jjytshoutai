@@ -107,4 +107,14 @@ export namespace http_juese
         }[],
         zongshu: number
     }
+
+    export interface tianjiaReq
+    {
+        mingcheng: string,
+        shuoming: string
+    }
+
+    export interface tianjiaRes
+    {
+    }
 }
