@@ -7,7 +7,6 @@ import {HttpYichang, ShujukuYichang, YichangXitongTuichu} from './config/yichang
 import {gengxinJiekou} from './config/zhujie';
 import {HttpJianquan} from './config/http.jianquan';
 import {redissession} from './config/redis.session';
-import {shujukubanben} from "./config/shujukubanben";
 
 async function bootstrap()
 {
@@ -19,7 +18,6 @@ async function bootstrap()
     app.useGlobalGuards(new HttpJianquan());
     app.use(redissession);
 
-    await shujukubanben.tongbushuju();
     await gengxinJiekou();
 
     await app.listen(peizhiwenjian.duankou);

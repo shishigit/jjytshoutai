@@ -4,7 +4,7 @@
   "scripts": {
     "ceshi": "ts-node ceshi/ceshi.ts",
     "build": "nest build",
-    "migration": "typeorm migration:generate -n qiyishuju_",
+    "migration": "typeorm migration:generate -n qiyishuju",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:prod": "node dist/main"
