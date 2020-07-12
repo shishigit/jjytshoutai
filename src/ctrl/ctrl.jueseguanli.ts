@@ -18,7 +18,8 @@ export class CtrlJueseguanli
                 return {
                     id: value.id,
                     mingcheng: value.mingcheng,
-                    shuoming: value.shuoming
+                    shuoming: value.shuoming,
+                    jihuo: value.jihuo
                 }
             })
         }

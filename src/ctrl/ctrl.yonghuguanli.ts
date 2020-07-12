@@ -11,8 +11,6 @@ import jihuoRes = http_yonghu.jihuoRes;
 import jihuoReq = http_yonghu.jihuoReq;
 import chaxunReq = http_yonghu.chaxunReq;
 import tianjiaReq = http_yonghu.tianjiaReq;
-import shanchuReq = http_yonghu.shanchuReq;
-import shanchuRes = http_yonghu.shanchuRes;
 import chaxunjueseReq = http_yonghu.chaxunjueseReq;
 import chaxunjueseRes = http_yonghu.chaxunjueseRes;
 import xiugaijueseReq = http_yonghu.xiugaijueseReq;
@@ -78,18 +76,6 @@ export class CtrlYonghuguanli
         if (!yonghu) throw meiyouyonghuyichang
         yonghu.jihuo = body.jihuo;
         await yonghu.save()
-        return {}
-    }
-
-    @JJYPost('shanchu', '删除用户')
-    async shanchu(
-        @JJYBody() body: shanchuReq,
-    ): Promise<shanchuRes>
-    {
-        if (!body.id) throw new YichangTishi('没有选取操作的用户！');
-        let yonghu = await SqlYonghu.findById(body.id);
-        if (!yonghu) throw meiyouyonghuyichang
-        await SqlYonghu.deleteById(body.id)
         return {}
     }
 

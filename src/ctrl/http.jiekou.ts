@@ -1,14 +1,5 @@
 export namespace http_yonghu
 {
-    export interface shanchuReq
-    {
-        id: number
-    }
-
-    export interface shanchuRes
-    {
-    }
-
     export interface tianjiaRes
     {
     }
@@ -97,14 +88,13 @@ export namespace http_xitong
         mima: string,
         zhanghao: string,
     }
-
 }
 
 export namespace http_juese
 {
     export interface chaxunReq
     {
-
+        mingcheng: string
     }
 
     export interface chaxunRes
@@ -113,6 +103,7 @@ export namespace http_juese
             id: number;
             mingcheng: string;
             shuoming: string;
+            jihuo: boolean
         }[],
         zongshu: number
     }
