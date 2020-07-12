@@ -3,7 +3,7 @@ import {YichangTishi} from '../config/yichang';
 import {SqlYonghu} from '../db/sql/sql.yonghu';
 import {Yonghu} from '../db/yonghu';
 import {jiami, stringUtil} from "../config/gongju";
-import {http_yonghu} from "./ctrl.jiekou";
+import {http_yonghu} from "./http.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
 import tianjiaRes = http_yonghu.tianjiaRes;
 import chaxunRes = http_yonghu.chaxunRes;

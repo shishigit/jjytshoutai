@@ -1,5 +1,5 @@
 import {JJYBody, JJYController, JJYPost} from "../config/zhujie";
-import {http_juese} from "./ctrl.jiekou";
+import {http_juese} from "./http.jiekou";
 import {SqlJuese} from "../db/sql/sql.juese";
 
 @JJYController('juese', '角色管理接口')
