@@ -1,12 +1,7 @@
-import * as redis from 'redis';
 import * as session from 'express-session';
 import * as connect_redis from 'connect-redis';
 import {peizhiwenjian} from './peizhiwenjian';
-
-const redisClient = redis.createClient({
-    host: peizhiwenjian.redis.host,
-    port: peizhiwenjian.redis.port,
-});
+import {redisClient} from "./gongju";
 
 const RedisStore = connect_redis(session);
 

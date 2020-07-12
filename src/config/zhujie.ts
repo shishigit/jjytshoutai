@@ -5,7 +5,7 @@ import {SqlJiekou} from '../db/sql/sql.jiekou';
 import {SqlJuese} from '../db/sql/sql.juese';
 import {YichangXitongTuichu} from './yichang';
 import {Type} from '@nestjs/common/interfaces';
-import {JianquanLeixing} from "./gongju";
+import {JianquanLeixing, redisUtil} from "./gongju";
 
 const PATH_SHUOMING = 'PATH_SHUOMING';
 const PATH_JIANQUAN = 'PATH_JIANQUAN';
@@ -28,6 +28,8 @@ export async function gengxinJiekou()
             await SqlJiekou.updateByUrl(jiekou);
         else
             await jiekou.save();
+
+        await redisUtil.setQuanxian(jiekou.jianquan, jiekou.url)
     }
 
     // 更新超级管理员接口
@@ -37,6 +39,8 @@ export async function gengxinJiekou()
 
     chaojiguanliyuan.jiekous = qiyongjiekou.filter(value => value.jianquan === 'jianquan');
     await chaojiguanliyuan.save();
+
+
 }
 
 /**

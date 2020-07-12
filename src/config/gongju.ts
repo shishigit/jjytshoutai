@@ -1,3 +1,6 @@
+import * as redis from "redis";
+import {peizhiwenjian} from "./peizhiwenjian";
+
 /*************************************************************************
  * 常量
  *************************************************************************/
@@ -54,3 +57,39 @@ class Jiami
 }
 
 export const jiami = new Jiami()
+
+/*************************************************************************
+ * Redis
+ *************************************************************************/
+
+export const redisClient = redis.createClient({
+    host: peizhiwenjian.redis.host,
+    port: peizhiwenjian.redis.port,
+});
+
+
+class RedisUtil
+{
+    private readonly get: (key: string) => Promise<string | null>
+    private readonly set: (key: string, value: string) => Promise<void>;
+
+    constructor()
+    {
+        const {promisify} = require("util");
+        this.set = promisify(redisClient.set).bind(redisClient);
+        this.get = promisify(redisClient.get).bind(redisClient);
+    }
+
+    getQuanxian(url: string)
+    {
+        return this.get(`jianquan:${url}`)
+    }
+
+    setQuanxian(jianquan: JianquanLeixing, url: string)
+    {
+        return this.set(`jianquan:${url}`, jianquan)
+    }
+
+}
+
+export const redisUtil = new RedisUtil()
