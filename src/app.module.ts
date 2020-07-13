@@ -5,12 +5,13 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {peizhiwenjian} from './config/peizhiwenjian';
 import {CtrlYonghuguanli} from './ctrl/ctrl.yonghuguanli';
 import {CtrlJueseguanli} from "./ctrl/ctrl.jueseguanli";
+import {CtrlBumenguanli} from "./ctrl/ctrl.bumenguanli";
 
 @Module({
     imports: [
         TypeOrmModule.forRoot(peizhiwenjian.shujuku),
     ],
-    controllers: [CtrlXitong, CtrlYonghuguanli, CtrlJueseguanli],
+    controllers: [CtrlXitong, CtrlYonghuguanli, CtrlJueseguanli, CtrlBumenguanli],
     providers: [AppService],
 })
 export class AppModule implements OnApplicationBootstrap
