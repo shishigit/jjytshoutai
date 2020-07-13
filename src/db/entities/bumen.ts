@@ -18,19 +18,19 @@ export class Bumen extends BaseEntity
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({comment: '备注'})
     beizhu: string
 
-    @Column({nullable: false})
+    @Column({nullable: false, comment: '名称'})
     mingcheng: string
-
-    @ManyToMany(() => Yonghu, yonghu => yonghu.bumens)
-    @JoinTable({name: 'bumen_yonghu'})
-    yonghus: Yonghu[];
 
     @TreeChildren()
     children: Bumen[];
 
     @TreeParent()
     parent: Bumen;
+
+    @ManyToMany(() => Yonghu, yonghu => yonghu.bumens)
+    @JoinTable({name: 'bumen_yonghu'})
+    yonghus: Yonghu[];
 }

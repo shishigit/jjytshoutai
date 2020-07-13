@@ -11,16 +11,13 @@ export class Yonghu extends BaseEntity
     @PrimaryGeneratedColumn({comment: 'ID'})
     id: number;
 
-    // 账号
-    @Column({nullable: false, unique: true})
+    @Column({nullable: false, unique: true, comment: '账号'})
     zhanghao: string;
 
-    // 密码
-    @Column({nullable: false})
+    @Column({nullable: false, comment: '密码'})
     mima: string;
 
-    // 激活
-    @Column({default: true, nullable: false})
+    @Column({default: true, nullable: false, comment: '激活'})
     jihuo: boolean;
 
     @ManyToMany(() => Juese, juese => juese.yonghus)
