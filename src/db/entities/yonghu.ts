@@ -12,11 +12,11 @@ export class Yonghu extends BaseEntity
     id: number;
 
     // 账号
-    @Column({width: 50, nullable: false, unique: true})
+    @Column({nullable: false, unique: true})
     zhanghao: string;
 
     // 密码
-    @Column({width: 50, nullable: false})
+    @Column({nullable: false})
     mima: string;
 
     // 激活

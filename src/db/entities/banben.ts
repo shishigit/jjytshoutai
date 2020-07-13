@@ -14,6 +14,6 @@ export class Banben extends BaseEntity
   banbenhao: string;
 
   // 版本说明
-  @Column({ width: 200, nullable: true })
+  @Column({nullable: true})
   shuoming: string;
 }

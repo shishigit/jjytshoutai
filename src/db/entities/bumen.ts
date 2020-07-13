@@ -18,10 +18,10 @@ export class Bumen extends BaseEntity
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({width: 200})
+    @Column()
     beizhu: string
 
-    @Column({width: 50, unique: true, nullable: false})
+    @Column({nullable: false})
     mingcheng: string
 
     @ManyToMany(() => Yonghu, yonghu => yonghu.bumens)

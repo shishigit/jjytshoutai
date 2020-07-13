@@ -21,11 +21,11 @@ export class Juese extends BaseEntity
     jihuo: boolean;
 
     // 名称
-    @Column({width: 50, nullable: false, unique: true})
+    @Column({nullable: false, unique: true})
     mingcheng: string;
 
     // 说明
-    @Column({width: 200, nullable: false})
+    @Column({nullable: false})
     shuoming: string;
 
     @ManyToMany(() => Yonghu, yonghu => yonghu.jueses)

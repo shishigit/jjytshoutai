@@ -188,4 +188,15 @@ export namespace http_bumen
     {
 
     }
+
+    export interface tianjiaReq
+    {
+        mingcheng: string
+        beizhu: string
+    }
+
+    export interface tianjiaRes
+    {
+
+    }
 }
