@@ -53,10 +53,9 @@ export class CtrlJueseguanli
         let yiyoujueses = await SqlJiekou.findByJueseids([canshu.id])
         let yiyoujieseids = yiyoujueses.map(value => value.id)
 
-        let suoyoujiekou = await SqlJiekou.findAll()
+        let qiyongjiekou = await SqlJiekou.findByQiyong(true)
 
-
-        return suoyoujiekou
+        return qiyongjiekou
             .filter(value => value.jianquan === 'jianquan')
             .map(value =>
             {
