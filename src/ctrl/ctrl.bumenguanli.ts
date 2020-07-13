@@ -9,8 +9,8 @@ export class CtrlBumenguanli
     @JJYPost('chaxun', '查询部门', 'jianquan')
     async denglu(
         @JJYBody() body: http_bumen.chaxunReq,
-    ): Promise<http_bumen.chaxunRes[]>
+    ): Promise<http_bumen.chaxunRes>
     {
-        return await SqlBumen.findAll()
+        return await SqlBumen.findTrees()
     }
 }

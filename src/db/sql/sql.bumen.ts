@@ -1,9 +1,10 @@
 import {Bumen} from "../entities/bumen";
+import {getManager} from "typeorm";
 
 export class SqlBumen
 {
-    static findAll()
+    static findTrees()
     {
-        return Bumen.find()
+        return getManager().getTreeRepository(Bumen).findTrees()
     }
 }
