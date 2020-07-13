@@ -6,9 +6,9 @@
   "password": "shishi",
   "database": "jjytshoutai",
   "entities": [
-    "dist/db/entities/*.js"
+    "dist/src/db/entities/*.js"
   ],
   "migrations": [
-    "dist/db/migrations/*.js"
+    "dist/src/db/migrations/*.js"
   ]
 }
