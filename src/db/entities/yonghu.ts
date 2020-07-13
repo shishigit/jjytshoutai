@@ -8,7 +8,7 @@ import {Bumen} from "./bumen";
 @Entity()
 export class Yonghu extends BaseEntity
 {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({comment: 'ID'})
     id: number;
 
     // 账号
