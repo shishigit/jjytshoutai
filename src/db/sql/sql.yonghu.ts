@@ -8,9 +8,9 @@ export class SqlYonghu
         return Yonghu.findOne({where: {zhanghao}});
     }
 
-    static findAndCountLike(zhanghao: string)
+    static pageFindAndCountLike(zhanghao: string, pageindex: number)
     {
-        return Yonghu.findAndCount({where: {zhanghao: Like(`%${zhanghao}%`)}})
+        return Yonghu.findAndCount({where: {zhanghao: Like(`%${zhanghao}%`)}, skip: (pageindex - 1) * 10, take: 10})
     }
 
     static findById(id: number)

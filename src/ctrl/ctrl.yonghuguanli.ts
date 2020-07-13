@@ -26,7 +26,7 @@ export class CtrlYonghuguanli
         @JJYBody() body: chaxunReq,
     ): Promise<chaxunRes>
     {
-        let ls = await SqlYonghu.findAndCountLike(body.zhanghao);
+        let ls = await SqlYonghu.pageFindAndCountLike(body.zhanghao, body.pageindex);
 
         return {
             yonghu: ls[0].map(value =>

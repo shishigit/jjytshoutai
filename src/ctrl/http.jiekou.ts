@@ -24,7 +24,8 @@ export namespace http_yonghu
 
     export interface chaxunReq
     {
-        zhanghao: string
+        pageindex: number
+        zhanghao: string,
     }
 
     export interface jihuoRes
