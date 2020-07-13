@@ -176,3 +176,16 @@ export namespace http_juese
 
     }
 }
+
+export namespace http_bumen
+{
+    export interface chaxunReq
+    {
+
+    }
+
+    export interface chaxunRes
+    {
+
+    }
+}
