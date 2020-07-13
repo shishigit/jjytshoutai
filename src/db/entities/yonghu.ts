@@ -1,5 +1,6 @@
 import {BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Juese} from './juese';
+import {Bumen} from "./bumen";
 
 /**
  * 系统用户
@@ -25,4 +26,7 @@ export class Yonghu extends BaseEntity
     @ManyToMany(() => Juese, juese => juese.yonghus)
     @JoinTable({name: 'yonghu_juese'})
     jueses: Juese[];
+
+    @ManyToMany(() => Bumen, bumen => bumen.yonghus)
+    bumens: Bumen[];
 }
