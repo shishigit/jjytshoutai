@@ -66,7 +66,22 @@ export namespace http_yonghu
 
 export namespace http_xitong
 {
+    export interface dengluReq
+    {
+        mima: string,
+        zhanghao: string,
+    }
+
     export interface dengluRes
+    {
+    }
+
+    export interface huoququanxianReq
+    {
+    }
+
+
+    export interface huoququanxianRes
     {
         // 请求分组
         fenzu: string;
@@ -82,12 +97,6 @@ export namespace http_xitong
         url: string;
         // 鉴权
         jianquan: string
-    }
-
-    export interface dengluReq
-    {
-        mima: string,
-        zhanghao: string,
     }
 }
 

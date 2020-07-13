@@ -8,8 +8,10 @@ import {SqlJiekou} from '../db/sql/sql.jiekou';
 import {SqlJuese} from '../db/sql/sql.juese';
 import {jiami} from "../config/gongju";
 import {http_xitong} from "./http.jiekou";
-import denglu = http_xitong.dengluRes;
+import dengluRes = http_xitong.dengluRes;
 import dengluReq = http_xitong.dengluReq;
+import huoququanxianReq = http_xitong.huoququanxianReq;
+import huoququanxianRes = http_xitong.huoququanxianRes;
 
 @JJYController('xitong', '系统接口')
 export class CtrlXitong
@@ -18,7 +20,7 @@ export class CtrlXitong
     async denglu(
         @JJYBody() body: dengluReq,
         @Session() session: JJYSession,
-    ): Promise<denglu[]>
+    ): Promise<dengluRes>
     {
         if (!body.zhanghao) throw  new YichangTishi('账号不能为空');
         if (!body.mima) throw  new YichangTishi('密码不能为空');
@@ -36,7 +38,19 @@ export class CtrlXitong
             .filter(value => value.jianquan === 'jianquan')
             .map(value => value.url);
 
-        let ret: denglu[] = []
+        return {}
+    }
+
+    @JJYPost('huoququanxian', '获取用户权限', 'denglu')
+    async huoququanxian(
+        @JJYBody() body: huoququanxianReq,
+        @Session() session: JJYSession,
+    ): Promise<huoququanxianRes[]>
+    {
+        let ret: huoququanxianRes[] = []
+
+        let juesesid = (await SqlJuese.findByYonghuId(session.yonghu.id)).map(value => value.id);
+        let jiekous = await SqlJiekou.findByJueseids(juesesid);
 
         jiekous
             .filter(value => value.jianquan === 'jianquan')
